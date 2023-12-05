@@ -4,6 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -23,6 +24,12 @@ public class Etudiant {
 
 	@Column(name = "noteMoyLastSemester")
 	private float noteMoyLastSemester;
+
+	@ManyToOne
+	private Bourse bourse1;
+
+	@ManyToOne
+	private Bourse bourse2;
 
 	public Etudiant() {
 		this("", "", 0);
@@ -93,5 +100,33 @@ public class Etudiant {
 	 */
 	public void setNoteMoyLastSemester(final float noteMoyLastSemester) {
 		this.noteMoyLastSemester = noteMoyLastSemester;
+	}
+
+	/**
+	 * @return the bourse1
+	 */
+	public Bourse getBourse1() {
+		return bourse1;
+	}
+
+	/**
+	 * @param bourse1 : the bourse1 to set
+	 */
+	public void setBourse1(final Bourse bourse1) {
+		this.bourse1 = bourse1;
+	}
+
+	/**
+	 * @return the bourse2
+	 */
+	public Bourse getBourse2() {
+		return bourse2;
+	}
+
+	/**
+	 * @param bourse2 : the bourse2 to set
+	 */
+	public void setBourse2(final Bourse bourse2) {
+		this.bourse2 = bourse2;
 	}
 }
