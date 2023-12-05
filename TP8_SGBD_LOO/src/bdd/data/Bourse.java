@@ -10,8 +10,12 @@ import javax.persistence.Table;
 @Table(name = "bourse")
 
 public class Bourse {
+	
 	@Id
 	@GeneratedValue
+	@Column(name = "id")
+	private int id;
+	
 	@Column(name = "destination")
 	private String destination;
 
@@ -53,6 +57,14 @@ public class Bourse {
 
 	public void setResponsable(String responsable) {
 		this.responsable = responsable;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 }
