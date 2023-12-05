@@ -1,11 +1,27 @@
 package bdd.data;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "etudiant")
 public class Etudiant {
 
+	@Id
+	@GeneratedValue
+	@Column(name = "numeroEtu")
+	private int numeroEtu;
+
+	@Column(name = "nom")
 	private String nom;
 
+	@Column(name = "prenom")
 	private String prenom;
-	private int numeroEtu;
+
+	@Column(name = "noteMoyLastSemester")
 	private float noteMoyLastSemester;
 
 	public Etudiant() {
