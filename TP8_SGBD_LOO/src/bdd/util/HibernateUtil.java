@@ -5,6 +5,7 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
+import bdd.data.Bourse;
 import bdd.data.Etudiant;
 
 public class HibernateUtil {
@@ -13,7 +14,7 @@ public class HibernateUtil {
 		try {
 			final Configuration conf = new Configuration().configure();
 			conf.addAnnotatedClass(Etudiant.class);
-//			conf.addAnnotatedClass(Livre.class);
+			conf.addAnnotatedClass(Bourse.class);
 //			conf.addAnnotatedClass(Editeur.class);
 			conf.configure();
 			final ServiceRegistry sr = new StandardServiceRegistryBuilder().applySettings(conf.getProperties()).build();
