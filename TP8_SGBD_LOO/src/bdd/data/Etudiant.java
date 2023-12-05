@@ -1,9 +1,13 @@
 package bdd.data;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -30,6 +34,9 @@ public class Etudiant {
 
 	@ManyToOne
 	private Bourse bourse2;
+
+	@ManyToMany
+	private final List<Enseignement> planEnseignement = new ArrayList<>();
 
 	public Etudiant() {
 		this("", "", 0);
@@ -128,5 +135,12 @@ public class Etudiant {
 	 */
 	public void setBourse2(final Bourse bourse2) {
 		this.bourse2 = bourse2;
+	}
+
+	/**
+	 * @return le plan d'enseignement
+	 */
+	public List<Enseignement> getPlanEnseignement() {
+		return planEnseignement;
 	}
 }
