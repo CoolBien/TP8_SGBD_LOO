@@ -8,19 +8,18 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "bourse")
-
 public class Bourse {
-	
+
 	@Id
 	@GeneratedValue
 	@Column(name = "id")
 	private int id;
-	
+
 	@Column(name = "destination")
 	private String destination;
 
 	@Column(name = "nbposte")
-	private int nbposte;
+	private int nbPoste;
 
 	@Column(name = "responsable")
 	private String responsable;
@@ -32,30 +31,30 @@ public class Bourse {
 	public Bourse(final String destination, final int nbposte, final String responsable) {
 		this.destination = destination;
 		this.responsable = responsable;
-		this.nbposte = nbposte;
+		nbPoste = nbposte;
 	}
 
 	public String getDestination() {
 		return destination;
 	}
 
-	public void setDestination(String destination) {
+	public void setDestination(final String destination) {
 		this.destination = destination;
 	}
 
-	public int getNbposte() {
-		return nbposte;
+	public int getNbPoste() {
+		return nbPoste;
 	}
 
-	public void setNbposte(int nbposte) {
-		this.nbposte = nbposte;
+	public void setNbPoste(final int nbposte) {
+		nbPoste = nbposte;
 	}
 
 	public String getResponsable() {
 		return responsable;
 	}
 
-	public void setResponsable(String responsable) {
+	public void setResponsable(final String responsable) {
 		this.responsable = responsable;
 	}
 
@@ -63,7 +62,7 @@ public class Bourse {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(final int id) {
 		this.id = id;
 	}
 
