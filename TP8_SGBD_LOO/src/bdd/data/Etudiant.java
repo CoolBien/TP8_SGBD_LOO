@@ -35,6 +35,12 @@ public class Etudiant {
 	@ManyToOne
 	private Bourse bourse2;
 
+	@ManyToOne
+	private Evaluation evaluation1;
+
+	@ManyToOne
+	private Evaluation evaluation2;
+
 	@ManyToMany
 	private final List<Enseignement> planEnseignement = new ArrayList<>();
 
@@ -143,4 +149,21 @@ public class Etudiant {
 	public List<Enseignement> getPlanEnseignement() {
 		return planEnseignement;
 	}
+
+	public Evaluation getEvaluation1() {
+		return evaluation1;
+	}
+
+	public void setEvaluation1(Evaluation evaluation1) {
+		this.evaluation1 = evaluation1;
+	}
+
+	public Evaluation getEvaluation2() {
+		return evaluation2;
+	}
+
+	public void setEvaluation2(Evaluation evaluation2) {
+		this.evaluation2 = evaluation2;
+	}
+	
 }

@@ -9,6 +9,7 @@ import bdd.data.Bourse;
 import bdd.data.Enseignant;
 import bdd.data.Enseignement;
 import bdd.data.Etudiant;
+import bdd.data.Evaluation;
 
 public class HibernateUtil {
 	private static final SessionFactory sessionFactory;
@@ -19,6 +20,7 @@ public class HibernateUtil {
 			conf.addAnnotatedClass(Bourse.class);
 			conf.addAnnotatedClass(Enseignement.class);
 			conf.addAnnotatedClass(Enseignant.class);
+			conf.addAnnotatedClass(Evaluation.class);
 			conf.configure();
 			final ServiceRegistry sr = new StandardServiceRegistryBuilder().applySettings(conf.getProperties()).build();
 			sessionFactory = conf.buildSessionFactory(sr);
