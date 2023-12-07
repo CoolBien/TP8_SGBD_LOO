@@ -23,8 +23,8 @@ public class SWTUTils {
 		errorMessage.open();
 	}
 
-	public static void showInfo(final Shell shell, final String title, final String message) {
-		final MessageBox errorMessage = new MessageBox(shell, SWT.ICON_INFORMATION);
+	public static void showError(final Shell shell, final String title, final String message) {
+		final MessageBox errorMessage = new MessageBox(shell, SWT.ICON_ERROR);
 		errorMessage.setText(title);
 		errorMessage.setMessage(message);
 		errorMessage.open();
@@ -32,6 +32,13 @@ public class SWTUTils {
 
 	public static void showWarning(final Shell shell, final String title, final String message) {
 		final MessageBox errorMessage = new MessageBox(shell, SWT.ICON_WARNING);
+		errorMessage.setText(title);
+		errorMessage.setMessage(message);
+		errorMessage.open();
+	}
+
+	public static void showInfo(final Shell shell, final String title, final String message) {
+		final MessageBox errorMessage = new MessageBox(shell, SWT.ICON_INFORMATION);
 		errorMessage.setText(title);
 		errorMessage.setMessage(message);
 		errorMessage.open();
