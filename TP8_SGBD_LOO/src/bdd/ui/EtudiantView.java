@@ -15,10 +15,11 @@ import org.eclipse.swt.widgets.Text;
 
 import bdd.controller.Controller;
 import bdd.data.Etudiant;
+import bdd.util.SWTUTils;
 
 public class EtudiantView {
 
-	public EtudiantView(TabFolder tabFolder) {
+	public EtudiantView(final TabFolder tabFolder) {
 
 		final TabItem tabItem = new TabItem(tabFolder, SWT.NONE);
 		tabItem.setText("Etudiant");
@@ -32,43 +33,48 @@ public class EtudiantView {
 		dataEtudiant.setLayoutData(new BorderData(SWT.TOP));
 		dataEtudiant.setLayout(new GridLayout(2, false));
 
-		Label label = new Label(dataEtudiant, SWT.NONE);
+		final Label label = new Label(dataEtudiant, SWT.NONE);
 		label.setLayoutData(new GridData(SWT.BEGINNING, SWT.CENTER, false, false));
 		label.setText("Nom");
 
-		Text text = new Text(dataEtudiant, SWT.SINGLE | SWT.LEAD | SWT.BORDER);
+		final Text text = new Text(dataEtudiant, SWT.SINGLE | SWT.LEAD | SWT.BORDER);
 		text.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
 
-		Label label1 = new Label(dataEtudiant, SWT.NONE);
+		final Label label1 = new Label(dataEtudiant, SWT.NONE);
 		label1.setLayoutData(new GridData(SWT.BEGINNING, SWT.CENTER, false, false));
 		label1.setText("Prenom");
 
-		Text text1 = new Text(dataEtudiant, SWT.SINGLE | SWT.LEAD | SWT.BORDER);
+		final Text text1 = new Text(dataEtudiant, SWT.SINGLE | SWT.LEAD | SWT.BORDER);
 		text1.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
 
-		Label label2 = new Label(dataEtudiant, SWT.NONE);
+		final Label label2 = new Label(dataEtudiant, SWT.NONE);
 		label2.setLayoutData(new GridData(SWT.BEGINNING, SWT.CENTER, false, false));
 		label2.setText("Note moyenne du dernier semestre");
 
-		Text text2 = new Text(dataEtudiant, SWT.SINGLE | SWT.LEAD | SWT.BORDER);
+		final Text text2 = new Text(dataEtudiant, SWT.SINGLE | SWT.LEAD | SWT.BORDER);
 		text2.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
 
-		Button button = new Button(dataEtudiant, SWT.PUSH);
+		final Button button = new Button(dataEtudiant, SWT.PUSH);
 		button.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false));
 		button.setText("Ajouter");
 		button.addSelectionListener(SelectionListener.widgetSelectedAdapter(e -> {
-			String nom = text.getText();
-			String prenom = text1.getText();
+			final String nom = text.getText();
+			final String prenom = text1.getText();
 			float notemoy = 0;
 			try {
 				notemoy = Float.parseFloat(text2.getText());
-			} catch (NumberFormatException exc) {
+			} catch (final NumberFormatException exc) {
+				SWTUTils.showError(button.getShell(), "Pas un nombre", "Veuillez mettre un nombre valide pour la note.");
 				System.err.println("pas un nombre");
 				return;
 			}
-			Etudiant etudiant = new Etudiant(nom, prenom, 0, notemoy);
+			if (notemoy < 0 || notemoy > 20) {
+				SWTUTils.showError(button.getShell(), "Nombre invalide", "Veuillez mettre un nombre valide entre 0 et 20 pour la note.");
+				System.err.println("nombre invalide");
+				return;
+			}
+			final Etudiant etudiant = new Etudiant(nom, prenom, 0, notemoy);
 			Controller.getInstance().addEtudiant(etudiant);
-			System.out.println("oui");
 		}));
 	}
 }
