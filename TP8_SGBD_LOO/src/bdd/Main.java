@@ -9,6 +9,7 @@ import org.eclipse.swt.widgets.TabFolder;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
+import bdd.controller.Controller;
 import bdd.ui.BourseView;
 import bdd.ui.EnseignantView;
 import bdd.ui.EnseignementView;
@@ -21,6 +22,8 @@ public class Main {
 		try (final SessionFactory sessFact = HibernateUtil.getSessionFactory();
 				final Session session = sessFact.getCurrentSession();) {
 			System.out.println("Connecté");
+
+			Controller.getInstance().setSession(session);
 
 			final Display display = new Display();
 			final Shell shell = new Shell(display);

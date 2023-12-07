@@ -4,6 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+
+import bdd.data.Etudiant;
+
 public class Controller implements IControllerListener {
 
 	////////////////////////////////// SINGLETON
@@ -60,4 +65,19 @@ public class Controller implements IControllerListener {
 	}
 
 	////////////////////////////////// CONTROLLER
+
+	private Session session;
+
+	public void setSession(Session session) {
+		this.session = session;
+	}
+
+	////////////////////////////////// CONTROLLER
+
+	public void addEtudiant(Etudiant etudiant) {
+		Transaction t = session.beginTransaction();
+		session.save(etudiant);
+		t.commit();
+		dispatchEvent(c -> c.addEtudiant(etudiant));
+	}
 }
