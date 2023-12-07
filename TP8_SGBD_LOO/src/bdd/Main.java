@@ -9,6 +9,9 @@ import org.eclipse.swt.widgets.TabFolder;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
+import bdd.ui.BourseView;
+import bdd.ui.EnseignantView;
+import bdd.ui.EnseignementView;
 import bdd.ui.EtudiantView;
 import bdd.util.HibernateUtil;
 
@@ -27,6 +30,9 @@ public class Main {
 			tabFolder.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 
 			new EtudiantView(tabFolder);
+			new EnseignantView(tabFolder);
+			new EnseignementView(tabFolder);
+			new BourseView(tabFolder);
 
 			shell.pack();
 			shell.open();
