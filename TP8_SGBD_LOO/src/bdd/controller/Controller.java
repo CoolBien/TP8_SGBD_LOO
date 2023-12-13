@@ -6,7 +6,6 @@ import java.util.function.Consumer;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-
 import bdd.data.Etudiant;
 
 public class Controller implements IControllerListener {
@@ -85,5 +84,12 @@ public class Controller implements IControllerListener {
 	public void addEtudiant(final Etudiant etudiant) {
 		session.save(etudiant);
 		dispatchEvent(c -> c.addEtudiant(etudiant));
+	}
+
+	/**
+	 * @return la liste des {@link Etudiant étudiants}.
+	 */
+	public List<Etudiant> getEtudiants() {
+		return session.createQuery("FROM Etudiant", Etudiant.class).list();
 	}
 }
