@@ -105,7 +105,7 @@ public class EtudiantView implements IControllerListener {
 
 	@Override
 	public void addEtudiant(final Etudiant etudiant) {
-		final TableItem tableItem= new TableItem(tableEtudiant, SWT.NONE);
+		final TableItem tableItem = new TableItem(tableEtudiant, SWT.NONE);
 		tableItem.setText(0, ""+etudiant.getNumeroEtu());
 		tableItem.setText(1, etudiant.getNom());
 		tableItem.setText(2, etudiant.getPrenom());
