@@ -90,7 +90,7 @@ public class BourseView implements IControllerListener {
 				nbPoste = Integer.parseInt(text1.getText());
 			} catch (final NumberFormatException exc) {
 				SWTUTils.showError(button.getShell(), "Pas un nombre",
-						"Veuillez mettre un nombre valide pour le nombre de crédit.");
+						"Veuillez mettre un nombre valide pour le nombre de poste.");
 				System.err.println("pas un nombre");
 				return;
 			}
