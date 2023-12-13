@@ -8,6 +8,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import bdd.data.Enseignant;
+import bdd.data.Enseignement;
 import bdd.data.Etudiant;
 
 public class Controller implements IControllerListener {
@@ -91,5 +92,10 @@ public class Controller implements IControllerListener {
 	public void addEnseignant(final Enseignant enseignant) {
 		session.save(enseignant);
 		dispatchEvent(c -> c.addEnseignant(enseignant));
+	}
+	
+	public void addEnseignement(final Enseignement enseignement) {
+		session.save(enseignement);
+		dispatchEvent(c -> c.addEnseignement(enseignement));
 	}
 }
