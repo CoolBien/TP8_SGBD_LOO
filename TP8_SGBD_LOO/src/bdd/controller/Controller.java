@@ -116,6 +116,13 @@ public class Controller implements IControllerListener {
 		dispatchEvent(c -> c.addEnseignement(enseignement));
 	}
 
+	/**
+	 * @return la liste des {@link Enseignement enseignements}.
+	 */
+	public List<Enseignement> getEnseignement() {
+		return session.createQuery("FROM Enseignement", Enseignement.class).list();
+	}
+
 	@Override
 	public void addBourse(final Bourse bourse) {
 		session.save(bourse);

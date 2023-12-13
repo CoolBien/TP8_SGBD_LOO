@@ -47,7 +47,7 @@ public class EnseignantView implements IControllerListener {
 		new TableColumn(tableEnseignant, SWT.LEAD).setText("NOM");
 		new TableColumn(tableEnseignant, SWT.LEAD).setText("Prénom");
 
-		for (final Enseignant e: Controller.getInstance().getEnseignants()) {
+		for (final Enseignant e : Controller.getInstance().getEnseignants()) {
 			addEnseignant(e);
 		}
 
@@ -84,7 +84,7 @@ public class EnseignantView implements IControllerListener {
 	@Override
 	public void addEnseignant(final Enseignant enseignant) {
 		final TableItem tableItem = new TableItem(tableEnseignant, SWT.NONE);
-		tableItem.setText(0, ""+enseignant.getId());
+		tableItem.setText(0, "" + enseignant.getId());
 		tableItem.setText(1, enseignant.getNom());
 		tableItem.setText(2, enseignant.getPrenom());
 	}

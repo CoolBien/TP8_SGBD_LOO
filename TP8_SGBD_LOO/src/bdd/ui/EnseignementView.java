@@ -11,15 +11,22 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.TabItem;
+import org.eclipse.swt.widgets.Table;
+import org.eclipse.swt.widgets.TableColumn;
+import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swt.widgets.Text;
 
 import bdd.controller.Controller;
+import bdd.controller.IControllerListener;
 import bdd.data.Enseignement;
 import bdd.util.SWTUTils;
 
-public class EnseignementView {
+public class EnseignementView implements IControllerListener {
+
+	private final Table tableEnseignement;
 
 	public EnseignementView(TabFolder tabFolder) {
+		Controller.getInstance().addListener(this);
 
 		final TabItem tabItem = new TabItem(tabFolder, SWT.NONE);
 		tabItem.setText("Enseignement");
@@ -32,6 +39,23 @@ public class EnseignementView {
 		final Composite dataEnseignement = new Composite(composite, SWT.NONE);
 		dataEnseignement.setLayoutData(new BorderData(SWT.TOP));
 		dataEnseignement.setLayout(new GridLayout(2, false));
+
+		tableEnseignement = new Table(composite, SWT.SINGLE | SWT.FULL_SELECTION | SWT.BORDER);
+		tableEnseignement.setLayoutData(new BorderData(SWT.CENTER));
+		tableEnseignement.setLinesVisible(true);
+		tableEnseignement.setHeaderVisible(true);
+		new TableColumn(tableEnseignement, SWT.LEAD).setText("Id");
+		new TableColumn(tableEnseignement, SWT.LEAD).setText("NOM");
+		new TableColumn(tableEnseignement, SWT.LEAD).setText("Nombre crédit");
+		new TableColumn(tableEnseignement, SWT.LEAD).setText("Volume horaire");
+
+		for (final Enseignement e : Controller.getInstance().getEnseignement()) {
+			addEnseignement(e);
+		}
+
+		for (int i = 0; i < tableEnseignement.getColumnCount(); i++) {
+			tableEnseignement.getColumn(i).pack();
+		}
 
 		final Label label = new Label(dataEnseignement, SWT.NONE);
 		label.setLayoutData(new GridData(SWT.BEGINNING, SWT.CENTER, false, false));
@@ -46,7 +70,7 @@ public class EnseignementView {
 
 		final Text text1 = new Text(dataEnseignement, SWT.SINGLE | SWT.LEAD | SWT.BORDER);
 		text1.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
-		
+
 		final Label label2 = new Label(dataEnseignement, SWT.NONE);
 		label2.setLayoutData(new GridData(SWT.BEGINNING, SWT.CENTER, false, false));
 		label2.setText("Volume horaire");
@@ -80,6 +104,15 @@ public class EnseignementView {
 			final Enseignement enseignement = new Enseignement(nom, nombreCredit, volumeHoraire);
 			Controller.getInstance().addEnseignement(enseignement);
 		}));
+	}
+
+	@Override
+	public void addEnseignement(final Enseignement enseignement) {
+		final TableItem tableItem = new TableItem(tableEnseignement, SWT.NONE);
+		tableItem.setText(0, "" + enseignement.getId());
+		tableItem.setText(1, enseignement.getNom());
+		tableItem.setText(2, "" + enseignement.getNombreCredit());
+		tableItem.setText(3, "" + enseignement.getVolumeHoraire());
 	}
 
 }
