@@ -11,23 +11,48 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.TabItem;
+import org.eclipse.swt.widgets.Table;
+import org.eclipse.swt.widgets.TableColumn;
+import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swt.widgets.Text;
 
 import bdd.controller.Controller;
+import bdd.controller.IControllerListener;
 import bdd.data.Etudiant;
 import bdd.util.SWTUTils;
 
-public class EtudiantView {
+public class EtudiantView implements IControllerListener {
+
+	private Table tableEtudiant;
 
 	public EtudiantView(final TabFolder tabFolder) {
+		Controller.getInstance().addListener(this);
 
 		final TabItem tabItem = new TabItem(tabFolder, SWT.NONE);
-		tabItem.setText("Etudiant");
+		tabItem.setText("Étudiant");
 
 		final Composite composite = new Composite(tabFolder, SWT.NONE);
 		composite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		composite.setLayout(new BorderLayout());
 		tabItem.setControl(composite);
+
+		tableEtudiant = new Table(composite, SWT.MULTI | SWT.FULL_SELECTION | SWT.BORDER);
+		tableEtudiant.setLayoutData(new BorderData(SWT.CENTER));
+		tableEtudiant.setLinesVisible(true);
+		tableEtudiant.setHeaderVisible(true);
+		new TableColumn(tableEtudiant, SWT.LEAD).setText("N° Etu");
+		new TableColumn(tableEtudiant, SWT.LEAD).setText("NOM");
+		new TableColumn(tableEtudiant, SWT.LEAD).setText("Prénom");
+		new TableColumn(tableEtudiant, SWT.LEAD).setText("Note moyenne du dernier semestre");
+
+		for (final Etudiant e: Controller.getInstance().getEtudiants()) {
+			addEtudiant(e);
+		}
+
+		for (int i = 0; i < tableEtudiant.getColumnCount(); i++) {
+			tableEtudiant.getColumn(i).pack();
+		}
+
 
 		final Composite dataEtudiant = new Composite(composite, SWT.NONE);
 		dataEtudiant.setLayoutData(new BorderData(SWT.TOP));
@@ -76,5 +101,14 @@ public class EtudiantView {
 			final Etudiant etudiant = new Etudiant(nom, prenom, 0, notemoy);
 			Controller.getInstance().addEtudiant(etudiant);
 		}));
+	}
+
+	@Override
+	public void addEtudiant(final Etudiant etudiant) {
+		final TableItem tableItem= new TableItem(tableEtudiant, SWT.NONE);
+		tableItem.setText(0, ""+etudiant.getNumeroEtu());
+		tableItem.setText(1, etudiant.getNom());
+		tableItem.setText(2, etudiant.getPrenom());
+		tableItem.setText(3, String.format("%2.1f", etudiant.getNoteMoyLastSemester()));
 	}
 }
