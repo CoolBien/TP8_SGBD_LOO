@@ -7,6 +7,7 @@ import java.util.function.Consumer;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import bdd.data.Bourse;
 import bdd.data.Enseignant;
 import bdd.data.Enseignement;
 import bdd.data.Etudiant;
@@ -105,5 +106,10 @@ public class Controller implements IControllerListener {
 	public void addEnseignement(final Enseignement enseignement) {
 		session.save(enseignement);
 		dispatchEvent(c -> c.addEnseignement(enseignement));
+	}
+	
+	public void addBourse(final Bourse bourse) {
+		session.save(bourse);
+		dispatchEvent(c -> c.addBourse(bourse));
 	}
 }
