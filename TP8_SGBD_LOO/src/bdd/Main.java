@@ -1,6 +1,7 @@
 package bdd;
 
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.ShellListener;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Display;
@@ -37,6 +38,7 @@ public class Main {
 			new EnseignementView(tabFolder);
 			new BourseView(tabFolder);
 
+			shell.addShellListener(ShellListener.shellClosedAdapter(s -> Controller.getInstance().endSession()));
 			shell.pack();
 			shell.open();
 			while (!shell.isDisposed()) {
@@ -44,7 +46,6 @@ public class Main {
 					display.sleep();
 			}
 			display.dispose();
-
 		}
 	}
 }

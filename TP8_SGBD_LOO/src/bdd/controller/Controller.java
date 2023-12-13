@@ -64,20 +64,26 @@ public class Controller implements IControllerListener {
 		}
 	}
 
-	////////////////////////////////// CONTROLLER
+	////////////////////////////////// SESSION
 
 	private Session session;
+	private Transaction transaction;
 
-	public void setSession(Session session) {
+	public void setSession(final Session session) {
 		this.session = session;
+		transaction = session.beginTransaction();
+	}
+
+	public void endSession() {
+		transaction.commit();
+		session = null;
 	}
 
 	////////////////////////////////// CONTROLLER
 
-	public void addEtudiant(Etudiant etudiant) {
-		Transaction t = session.beginTransaction();
+	@Override
+	public void addEtudiant(final Etudiant etudiant) {
 		session.save(etudiant);
-		t.commit();
 		dispatchEvent(c -> c.addEtudiant(etudiant));
 	}
 }
