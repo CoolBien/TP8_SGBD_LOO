@@ -6,6 +6,8 @@ import java.util.function.Consumer;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+
+import bdd.data.Enseignant;
 import bdd.data.Etudiant;
 
 public class Controller implements IControllerListener {
@@ -53,7 +55,7 @@ public class Controller implements IControllerListener {
 	 * @param action : the action to execute with each listeners.
 	 */
 	private void dispatchEvent(final Consumer<IControllerListener> action) {
-		for (int i = listeners.size(); i --> 0;) {
+		for (int i = listeners.size(); i-- > 0;) {
 			try {
 				action.accept(listeners.get(i));
 			} catch (final Exception e) {
@@ -91,5 +93,11 @@ public class Controller implements IControllerListener {
 	 */
 	public List<Etudiant> getEtudiants() {
 		return session.createQuery("FROM Etudiant", Etudiant.class).list();
+	}
+
+	@Override
+	public void addEnseignant(final Enseignant enseignant) {
+		session.save(enseignant);
+		dispatchEvent(c -> c.addEnseignant(enseignant));
 	}
 }
