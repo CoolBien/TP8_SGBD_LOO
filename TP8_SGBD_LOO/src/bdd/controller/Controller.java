@@ -109,13 +109,24 @@ public class Controller implements IControllerListener {
 	public List<Enseignant> getEnseignants() {
 		return session.createQuery("FROM Enseignant", Enseignant.class).list();
 	}
+	
+	/**
+	 * @return la liste des {@link Enseignement enseignement}.
+	 */
+	public List<Enseignement> getEnseignement() {
+		return session.createQuery("FROM Enseignement", Enseignement.class).list();
+	}
 
+	
 	@Override
 	public void addEnseignement(final Enseignement enseignement) {
 		session.save(enseignement);
 		dispatchEvent(c -> c.addEnseignement(enseignement));
 	}
 	
+	/**
+	 * @return la liste des {@link Bourse bourse}.
+	 */
 	public void addBourse(final Bourse bourse) {
 		session.save(bourse);
 		dispatchEvent(c -> c.addBourse(bourse));

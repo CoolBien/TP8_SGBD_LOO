@@ -45,14 +45,13 @@ public class EtudiantView implements IControllerListener {
 		new TableColumn(tableEtudiant, SWT.LEAD).setText("Prénom");
 		new TableColumn(tableEtudiant, SWT.LEAD).setText("Note moyenne du dernier semestre");
 
-		for (final Etudiant e: Controller.getInstance().getEtudiants()) {
+		for (final Etudiant e : Controller.getInstance().getEtudiants()) {
 			addEtudiant(e);
 		}
 
 		for (int i = 0; i < tableEtudiant.getColumnCount(); i++) {
 			tableEtudiant.getColumn(i).pack();
 		}
-
 
 		final Composite dataEtudiant = new Composite(composite, SWT.NONE);
 		dataEtudiant.setLayoutData(new BorderData(SWT.TOP));
@@ -89,12 +88,14 @@ public class EtudiantView implements IControllerListener {
 			try {
 				notemoy = Float.parseFloat(text2.getText());
 			} catch (final NumberFormatException exc) {
-				SWTUTils.showError(button.getShell(), "Pas un nombre", "Veuillez mettre un nombre valide pour la note.");
+				SWTUTils.showError(button.getShell(), "Pas un nombre",
+						"Veuillez mettre un nombre valide pour la note.");
 				System.err.println("pas un nombre");
 				return;
 			}
 			if (notemoy < 0 || notemoy > 20) {
-				SWTUTils.showError(button.getShell(), "Nombre invalide", "Veuillez mettre un nombre valide entre 0 et 20 pour la note.");
+				SWTUTils.showError(button.getShell(), "Nombre invalide",
+						"Veuillez mettre un nombre valide entre 0 et 20 pour la note.");
 				System.err.println("nombre invalide");
 				return;
 			}
@@ -106,7 +107,7 @@ public class EtudiantView implements IControllerListener {
 	@Override
 	public void addEtudiant(final Etudiant etudiant) {
 		final TableItem tableItem = new TableItem(tableEtudiant, SWT.NONE);
-		tableItem.setText(0, ""+etudiant.getNumeroEtu());
+		tableItem.setText(0, "" + etudiant.getNumeroEtu());
 		tableItem.setText(1, etudiant.getNom());
 		tableItem.setText(2, etudiant.getPrenom());
 		tableItem.setText(3, String.format("%2.1f", etudiant.getNoteMoyLastSemester()));
