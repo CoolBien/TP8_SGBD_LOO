@@ -115,9 +115,17 @@ public class Controller implements IControllerListener {
 		session.save(enseignement);
 		dispatchEvent(c -> c.addEnseignement(enseignement));
 	}
-	
+
+	@Override
 	public void addBourse(final Bourse bourse) {
 		session.save(bourse);
 		dispatchEvent(c -> c.addBourse(bourse));
+	}
+
+	/**
+	 * @return la liste des {@link Bourse bourses}.
+	 */
+	public List<Bourse> getBourses() {
+		return session.createQuery("FROM Bourse", Bourse.class).list();
 	}
 }

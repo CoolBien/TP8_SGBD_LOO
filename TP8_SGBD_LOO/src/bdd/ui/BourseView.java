@@ -11,15 +11,22 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.TabItem;
+import org.eclipse.swt.widgets.Table;
+import org.eclipse.swt.widgets.TableColumn;
+import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swt.widgets.Text;
 
 import bdd.controller.Controller;
+import bdd.controller.IControllerListener;
 import bdd.data.Bourse;
 import bdd.util.SWTUTils;
 
-public class BourseView {
+public class BourseView implements IControllerListener {
 
-	public BourseView(TabFolder tabFolder) {
+	private Table tableBourse;
+
+	public BourseView(final TabFolder tabFolder) {
+		Controller.getInstance().addListener(this);
 
 		final TabItem tabItem = new TabItem(tabFolder, SWT.NONE);
 		tabItem.setText("Bourse");
@@ -29,7 +36,24 @@ public class BourseView {
 		composite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		composite.setLayout(new BorderLayout());
 		tabItem.setControl(composite);
-		
+
+		tableBourse = new Table(composite, SWT.MULTI | SWT.FULL_SELECTION | SWT.BORDER);
+		tableBourse.setLayoutData(new BorderData());
+		tableBourse.setLinesVisible(true);
+		tableBourse.setHeaderVisible(true);
+		new TableColumn(tableBourse, SWT.LEAD).setText("ID");
+		new TableColumn(tableBourse, SWT.LEAD).setText("Destination");
+		new TableColumn(tableBourse, SWT.LEAD).setText("Nb Poste");
+		new TableColumn(tableBourse, SWT.LEAD).setText("Responsable");
+
+		for (final Bourse b: Controller.getInstance().getBourses()) {
+			addBourse(b);
+		}
+
+		for (int i = 0; i < tableBourse.getColumnCount(); i++) {
+			tableBourse.getColumn(i).pack();
+		}
+
 		final Composite dataBourse = new Composite(composite, SWT.NONE);
 		dataBourse.setLayoutData(new BorderData(SWT.TOP));
 		dataBourse.setLayout(new GridLayout(2, false));
@@ -47,7 +71,7 @@ public class BourseView {
 
 		final Text text1 = new Text(dataBourse, SWT.SINGLE | SWT.LEAD | SWT.BORDER);
 		text1.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
-		
+
 		final Label label2 = new Label(dataBourse, SWT.NONE);
 		label2.setLayoutData(new GridData(SWT.BEGINNING, SWT.CENTER, false, false));
 		label2.setText("Responsable");
@@ -75,4 +99,12 @@ public class BourseView {
 		}));
 	}
 
+	@Override
+	public void addBourse(final Bourse bourse) {
+		final TableItem tableItem = new TableItem(tableBourse, SWT.NONE);
+		tableItem.setText(0, ""+bourse.getId());
+		tableItem.setText(1, bourse.getDestination());
+		tableItem.setText(2, ""+bourse.getNbPoste());
+		tableItem.setText(3, bourse.getResponsable());
+	}
 }
