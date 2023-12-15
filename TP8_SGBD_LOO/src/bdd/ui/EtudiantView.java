@@ -1,6 +1,8 @@
 package bdd.ui;
 
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.layout.BorderData;
 import org.eclipse.swt.layout.BorderLayout;
@@ -34,6 +36,7 @@ public class EtudiantView implements IControllerListener {
 	private Combo comboEnseignant2;
 	private Combo comboBourse1;
 	private Combo comboBourse2;
+	private Table tableEnseignement;
 
 
 	public EtudiantView(final TabFolder tabFolder) {
@@ -44,10 +47,14 @@ public class EtudiantView implements IControllerListener {
 
 		final Composite composite = new Composite(tabFolder, SWT.NONE);
 		composite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
-		composite.setLayout(new BorderLayout());
+		composite.setLayout(new GridLayout(2, false));
 		tabItem.setControl(composite);
 
-		tableEtudiant = new Table(composite, SWT.MULTI | SWT.FULL_SELECTION | SWT.BORDER);
+		final Composite leftComposite = new Composite(composite, SWT.NONE);
+		leftComposite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
+		leftComposite.setLayout(new BorderLayout());
+
+		tableEtudiant = new Table(leftComposite, SWT.MULTI | SWT.FULL_SELECTION | SWT.BORDER);
 		tableEtudiant.setLayoutData(new BorderData(SWT.CENTER));
 		tableEtudiant.setLinesVisible(true);
 		tableEtudiant.setHeaderVisible(true);
@@ -70,7 +77,7 @@ public class EtudiantView implements IControllerListener {
 			tableEtudiant.getColumn(i).pack();
 		}
 
-		final Composite dataEtudiant = new Composite(composite, SWT.NONE);
+		final Composite dataEtudiant = new Composite(leftComposite, SWT.NONE);
 		dataEtudiant.setLayoutData(new BorderData(SWT.TOP));
 		dataEtudiant.setLayout(new GridLayout(2, false));
 
@@ -94,17 +101,6 @@ public class EtudiantView implements IControllerListener {
 
 		final Text noteEntry = new Text(dataEtudiant, SWT.SINGLE | SWT.LEAD | SWT.BORDER);
 		noteEntry.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
-
-		final Label label3 = new Label(dataEtudiant, SWT.NONE);
-		label3.setLayoutData(new GridData(SWT.BEGINNING, SWT.CENTER, false, false));
-		label3.setText("Enseignement");
-
-		comboEnseignement = new Combo(dataEtudiant, SWT.DROP_DOWN | SWT.READ_ONLY);
-		comboEnseignement.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
-
-		for (final Enseignement e : Controller.getInstance().getEnseignements()) {
-			addEnseignement(e);
-		}
 
 		final Label label4 = new Label(dataEtudiant, SWT.NONE);
 		label4.setLayoutData(new GridData(SWT.BEGINNING, SWT.CENTER, false, false));
@@ -220,6 +216,46 @@ public class EtudiantView implements IControllerListener {
 
 			Controller.getInstance().addEtudiant(etudiant);
 		}));
+
+		final Composite rightComposite = new Composite(composite, SWT.NONE);
+		rightComposite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
+		rightComposite.setLayout(new BorderLayout());
+
+		tableEnseignement = new Table(rightComposite, SWT.MULTI | SWT.FULL_SELECTION | SWT.BORDER);
+		tableEnseignement.setLayoutData(new BorderData(SWT.CENTER));
+		tableEnseignement.setLinesVisible(true);
+		tableEnseignement.setHeaderVisible(true);
+		new TableColumn(tableEnseignement, SWT.NONE).setText("Enseignement");
+
+		for (int i = 0; i < tableEnseignement.getColumnCount(); i++) {
+			tableEnseignement.getColumn(i).pack();
+		}
+
+		final Composite dataEnseignement = new Composite(rightComposite, SWT.NONE);
+		dataEnseignement.setLayoutData(new BorderData(SWT.TOP));
+		dataEnseignement.setLayout(new GridLayout(2, false));
+
+		final Label label3 = new Label(dataEnseignement, SWT.NONE);
+		label3.setLayoutData(new GridData(SWT.BEGINNING, SWT.CENTER, false, false));
+		label3.setText("Enseignement");
+
+		comboEnseignement = new Combo(dataEnseignement, SWT.DROP_DOWN | SWT.READ_ONLY);
+		comboEnseignement.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
+
+		for (final Enseignement e : Controller.getInstance().getEnseignements()) {
+			addEnseignement(e);
+		}
+
+		final Button buttonAddEnseignement = new Button(dataEnseignement, SWT.PUSH);
+		buttonAddEnseignement.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false));
+		buttonAddEnseignement.setText("Ajouter un enseignement");
+		buttonAddEnseignement.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(final SelectionEvent e) {
+				// TODO
+			}
+		});
+
 	}
 
 	@Override
