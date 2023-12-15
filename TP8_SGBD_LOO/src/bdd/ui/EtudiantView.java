@@ -273,9 +273,9 @@ public class EtudiantView implements IControllerListener {
 
 	@Override
 	public void addBourse(final Bourse bourse) {
-		comboBourse1.add(bourse.getDestination());
-		comboBourse2.add(bourse.getDestination());
 		comboBourse1.setData(""+comboBourse1.getItemCount(), bourse);
 		comboBourse2.setData(""+comboBourse2.getItemCount(), bourse);
+		comboBourse1.add(bourse.getDestination());
+		comboBourse2.add(bourse.getDestination());
 	}
 }
