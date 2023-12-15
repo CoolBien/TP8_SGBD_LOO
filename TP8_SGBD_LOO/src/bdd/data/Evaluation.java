@@ -17,16 +17,16 @@ public class Evaluation {
 	private int id;
 
 	@Column(name = "note")
-	private int note;
+	private float note;
 
 	@ManyToOne
 	private Enseignant enseignant;
 
-	public int getNote() {
+	public float getNote() {
 		return note;
 	}
 
-	public void setNote(final int note) {
+	public void setNote(final float note) {
 		this.note = note;
 	}
 
