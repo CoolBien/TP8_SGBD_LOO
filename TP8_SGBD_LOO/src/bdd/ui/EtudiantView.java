@@ -1,8 +1,6 @@
 package bdd.ui;
 
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.events.SelectionAdapter;
-import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.layout.BorderData;
 import org.eclipse.swt.layout.BorderLayout;
@@ -54,7 +52,7 @@ public class EtudiantView implements IControllerListener {
 		leftComposite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		leftComposite.setLayout(new BorderLayout());
 
-		tableEtudiant = new Table(leftComposite, SWT.MULTI | SWT.FULL_SELECTION | SWT.BORDER);
+		tableEtudiant = new Table(leftComposite, SWT.SINGLE | SWT.FULL_SELECTION | SWT.BORDER);
 		tableEtudiant.setLayoutData(new BorderData(SWT.CENTER));
 		tableEtudiant.setLinesVisible(true);
 		tableEtudiant.setHeaderVisible(true);
@@ -90,7 +88,7 @@ public class EtudiantView implements IControllerListener {
 
 		final Label label1 = new Label(dataEtudiant, SWT.NONE);
 		label1.setLayoutData(new GridData(SWT.BEGINNING, SWT.CENTER, false, false));
-		label1.setText("Prenom");
+		label1.setText("Prénom");
 
 		final Text firstNameEntry = new Text(dataEtudiant, SWT.SINGLE | SWT.LEAD | SWT.BORDER);
 		firstNameEntry.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
@@ -249,12 +247,9 @@ public class EtudiantView implements IControllerListener {
 		final Button buttonAddEnseignement = new Button(dataEnseignement, SWT.PUSH);
 		buttonAddEnseignement.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false));
 		buttonAddEnseignement.setText("Ajouter un enseignement");
-		buttonAddEnseignement.addSelectionListener(new SelectionAdapter() {
-			@Override
-			public void widgetSelected(final SelectionEvent e) {
-				// TODO
-			}
-		});
+		buttonAddEnseignement.addSelectionListener(SelectionListener.widgetSelectedAdapter(e -> {
+			//
+		}));
 
 	}
 

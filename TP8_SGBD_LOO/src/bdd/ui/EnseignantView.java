@@ -64,7 +64,7 @@ public class EnseignantView implements IControllerListener {
 
 		final Label label1 = new Label(dataEnseignant, SWT.NONE);
 		label1.setLayoutData(new GridData(SWT.BEGINNING, SWT.CENTER, false, false));
-		label1.setText("Prenom");
+		label1.setText("Prénom");
 
 		final Text text1 = new Text(dataEnseignant, SWT.SINGLE | SWT.LEAD | SWT.BORDER);
 		text1.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
