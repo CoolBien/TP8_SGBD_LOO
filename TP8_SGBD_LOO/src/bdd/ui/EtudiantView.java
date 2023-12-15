@@ -48,10 +48,6 @@ public class EtudiantView implements IControllerListener {
 		new TableColumn(tableEtudiant, SWT.LEAD).setText("Prénom");
 		new TableColumn(tableEtudiant, SWT.LEAD).setText("Note moyenne du dernier semestre");
 
-		for (final Etudiant e : Controller.getInstance().getEtudiants()) {
-			addEtudiant(e);
-		}
-
 		for (int i = 0; i < tableEtudiant.getColumnCount(); i++) {
 			tableEtudiant.getColumn(i).pack();
 		}
@@ -84,14 +80,10 @@ public class EtudiantView implements IControllerListener {
 		final Label label3 = new Label(dataEtudiant, SWT.NONE);
 		label3.setLayoutData(new GridData(SWT.BEGINNING, SWT.CENTER, false, false));
 		label3.setText("Enseignement");
-		
+
 		combo = new Combo(dataEtudiant, SWT.DROP_DOWN | SWT.READ_ONLY);
 		combo.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
 
-		for (final Enseignement e : Controller.getInstance().getEnseignement()) {
-			addEnseignement(e);
-		}
-		
 		final Button button = new Button(dataEtudiant, SWT.PUSH);
 		button.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false));
 		button.setText("Ajouter");
@@ -128,7 +120,7 @@ public class EtudiantView implements IControllerListener {
 	}
 
 	@Override
-	public void addEnseignement(Enseignement enseignement) {
+	public void addEnseignement(final Enseignement enseignement) {
 		combo.add(enseignement.getNom());
 	}
 }

@@ -24,8 +24,6 @@ public class Main {
 				final Session session = sessFact.getCurrentSession();) {
 			System.out.println("Connecté");
 
-			Controller.getInstance().setSession(session);
-
 			final Display display = new Display();
 			final Shell shell = new Shell(display);
 			shell.setLayout(new GridLayout(1, false));
@@ -37,6 +35,8 @@ public class Main {
 			new EnseignantView(tabFolder);
 			new EnseignementView(tabFolder);
 			new BourseView(tabFolder);
+
+			Controller.getInstance().setSession(session);
 
 			shell.addShellListener(ShellListener.shellClosedAdapter(s -> Controller.getInstance().endSession()));
 			shell.pack();
