@@ -114,14 +114,20 @@ public class EtudiantView implements IControllerListener {
 
 		combo3 = new Combo(dataEtudiant, SWT.DROP_DOWN | SWT.READ_ONLY);
 		combo3.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
-
+		combo3.add("Pas de bourse");
+		combo3.setText("Pas de bourse");
+		combo3.setData("0", null);
+		
 		final Label label6 = new Label(dataEtudiant, SWT.NONE);
 		label6.setLayoutData(new GridData(SWT.BEGINNING, SWT.CENTER, false, false));
 		label6.setText("Bourse 2");
 
 		combo4 = new Combo(dataEtudiant, SWT.DROP_DOWN | SWT.READ_ONLY);
 		combo4.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
-
+		combo4.add("Pas de bourse");
+		combo4.setText("Pas de bourse");
+		combo4.setData("0", null);
+		
 		for (final Bourse b : Controller.getInstance().getBourses()) {
 			addBourse(b);
 		}
