@@ -242,8 +242,8 @@ public class EtudiantView implements IControllerListener {
 
 		if (evaluation2 != null) {
 			final Enseignant enseignant2 = evaluation2.getEnseignant();
-			tableItem.setText(4,    enseignant2.getNom()+" "+enseignant2.getPrenom());
-			tableItem.setText(5, ""+evaluation2.getNote());
+			tableItem.setText(6,    enseignant2.getNom()+" "+enseignant2.getPrenom());
+			tableItem.setText(7, ""+evaluation2.getNote());
 		}
 
 		final Bourse bourse1 = etudiant.getBourse1();
@@ -253,7 +253,7 @@ public class EtudiantView implements IControllerListener {
 
 		final Bourse bourse2 = etudiant.getBourse2();
 		if (bourse2 != null) {
-			tableItem.setText(8, bourse2.getDestination());
+			tableItem.setText(9, bourse2.getDestination());
 		}
 	}
 
