@@ -7,6 +7,7 @@ import org.eclipse.swt.layout.BorderLayout;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.TabFolder;
@@ -18,12 +19,14 @@ import org.eclipse.swt.widgets.Text;
 
 import bdd.controller.Controller;
 import bdd.controller.IControllerListener;
+import bdd.data.Enseignement;
 import bdd.data.Etudiant;
 import bdd.util.SWTUTils;
 
 public class EtudiantView implements IControllerListener {
 
 	private Table tableEtudiant;
+	private Combo combo;
 
 	public EtudiantView(final TabFolder tabFolder) {
 		Controller.getInstance().addListener(this);
@@ -78,6 +81,17 @@ public class EtudiantView implements IControllerListener {
 		final Text text2 = new Text(dataEtudiant, SWT.SINGLE | SWT.LEAD | SWT.BORDER);
 		text2.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
 
+		final Label label3 = new Label(dataEtudiant, SWT.NONE);
+		label3.setLayoutData(new GridData(SWT.BEGINNING, SWT.CENTER, false, false));
+		label3.setText("Enseignement");
+		
+		combo = new Combo(dataEtudiant, SWT.DROP_DOWN | SWT.READ_ONLY);
+		combo.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
+
+		for (final Enseignement e : Controller.getInstance().getEnseignement()) {
+			addEnseignement(e);
+		}
+		
 		final Button button = new Button(dataEtudiant, SWT.PUSH);
 		button.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false));
 		button.setText("Ajouter");
@@ -111,5 +125,10 @@ public class EtudiantView implements IControllerListener {
 		tableItem.setText(1, etudiant.getNom());
 		tableItem.setText(2, etudiant.getPrenom());
 		tableItem.setText(3, String.format("%2.1f", etudiant.getNoteMoyLastSemester()));
+	}
+
+	@Override
+	public void addEnseignement(Enseignement enseignement) {
+		combo.add(enseignement.getNom());
 	}
 }
