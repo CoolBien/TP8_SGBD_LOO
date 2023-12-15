@@ -254,9 +254,8 @@ public class EtudiantView implements IControllerListener {
 		buttonAddEnseignement.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false));
 		buttonAddEnseignement.setText("Ajouter un enseignement");
 		buttonAddEnseignement.addSelectionListener(SelectionListener.widgetSelectedAdapter(e -> {
-			//
 			final Enseignement enseignement = (Enseignement) comboEnseignement.getData(""+comboEnseignement.getSelectionIndex());
-			Controller.getInstance().getSelectedEtudiant().getPlanEnseignement().add(enseignement);
+			Controller.getInstance().addEnseignementToSelectedEtudiant(enseignement);
 		}));
 
 	}
@@ -268,6 +267,7 @@ public class EtudiantView implements IControllerListener {
 		final Evaluation evaluation2 = etudiant.getEvaluation2();
 
 		final TableItem tableItem = new TableItem(tableEtudiant, SWT.NONE);
+		tableItem.setData(etudiant);
 		tableItem.setText(0, "" + etudiant.getNumeroEtu());
 		tableItem.setText(1, etudiant.getNom());
 		tableItem.setText(2, etudiant.getPrenom());
@@ -320,12 +320,20 @@ public class EtudiantView implements IControllerListener {
 
 	@Override
 	public void setSelectedEtudiant(final Etudiant etudiant) {
+		for (final TableItem item : tableEnseignement.getItems()) {
+			item.dispose();
+		}
 		tableEnseignement.clearAll();
 		for (final Enseignement e: etudiant.getPlanEnseignement()) {
-			final TableItem item = new TableItem(tableEnseignement, SWT.NONE);
-			item.setText(0, e.getNom());
-			item.setText(1, ""+e.getVolumeHoraire());
-			item.setText(2, ""+e.getNombreCredit());
+			addEnseignementToSelectedEtudiant(e);
 		}
+	}
+
+	@Override
+	public void addEnseignementToSelectedEtudiant(final Enseignement e) {
+		final TableItem item = new TableItem(tableEnseignement, SWT.NONE);
+		item.setText(0, e.getNom());
+		item.setText(1, ""+e.getVolumeHoraire());
+		item.setText(2, ""+e.getNombreCredit());
 	}
 }

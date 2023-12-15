@@ -16,4 +16,6 @@ public interface IControllerListener {
 	default void addBourse(final Bourse bourse) {}
 
 	default void setSelectedEtudiant(final Etudiant etudiant) {}
+
+	default void addEnseignementToSelectedEtudiant(final Enseignement enseignement) {}
 }
