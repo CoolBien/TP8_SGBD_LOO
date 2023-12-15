@@ -87,6 +87,12 @@ public class Controller implements IControllerListener {
 	@Override
 	public void addEtudiant(final Etudiant etudiant) {
 		session.save(etudiant);
+		if (etudiant.getEvaluation1() != null) {
+			session.save(etudiant.getEvaluation1());
+		}
+		if (etudiant.getEvaluation2() != null) {
+			session.save(etudiant.getEvaluation2());
+		}
 		dispatchEvent(c -> c.addEtudiant(etudiant));
 	}
 
