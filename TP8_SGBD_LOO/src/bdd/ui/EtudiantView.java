@@ -23,6 +23,7 @@ import bdd.data.Bourse;
 import bdd.data.Enseignant;
 import bdd.data.Enseignement;
 import bdd.data.Etudiant;
+import bdd.data.Evaluation;
 import bdd.util.SWTUTils;
 
 public class EtudiantView implements IControllerListener {
@@ -52,6 +53,12 @@ public class EtudiantView implements IControllerListener {
 		new TableColumn(tableEtudiant, SWT.LEAD).setText("NOM");
 		new TableColumn(tableEtudiant, SWT.LEAD).setText("Prénom");
 		new TableColumn(tableEtudiant, SWT.LEAD).setText("Note moyenne du dernier semestre");
+		new TableColumn(tableEtudiant, SWT.LEAD).setText("Enseigant 1");
+		new TableColumn(tableEtudiant, SWT.LEAD).setText("Note 1");
+		new TableColumn(tableEtudiant, SWT.LEAD).setText("Enseigant 2");
+		new TableColumn(tableEtudiant, SWT.LEAD).setText("Note 2");
+		new TableColumn(tableEtudiant, SWT.LEAD).setText("Bourse 1");
+		new TableColumn(tableEtudiant, SWT.LEAD).setText("Bourse 2");
 
 		for (final Etudiant e : Controller.getInstance().getEtudiants()) {
 			addEtudiant(e);
@@ -117,7 +124,7 @@ public class EtudiantView implements IControllerListener {
 		combo3.add("Pas de bourse");
 		combo3.setText("Pas de bourse");
 		combo3.setData("0", null);
-		
+
 		final Label label6 = new Label(dataEtudiant, SWT.NONE);
 		label6.setLayoutData(new GridData(SWT.BEGINNING, SWT.CENTER, false, false));
 		label6.setText("Bourse 2");
@@ -127,7 +134,7 @@ public class EtudiantView implements IControllerListener {
 		combo4.add("Pas de bourse");
 		combo4.setText("Pas de bourse");
 		combo4.setData("0", null);
-		
+
 		for (final Bourse b : Controller.getInstance().getBourses()) {
 			addBourse(b);
 		}
@@ -153,18 +160,56 @@ public class EtudiantView implements IControllerListener {
 				System.err.println("nombre invalide");
 				return;
 			}
+
+			final Evaluation eval1 = new Evaluation();
+			final Evaluation eval2 = new Evaluation();
+
+			eval1.setEnseignant((Enseignant) combo2.getData(""+combo2.getSelectionIndex()));
+			eval2.setEnseignant((Enseignant) combo2.getData(""+combo2.getSelectionIndex()));
+
 			final Etudiant etudiant = new Etudiant(nom, prenom, 0, notemoy);
+			etudiant.setEvaluation1(eval1);
+			etudiant.setEvaluation2(eval2);
+			etudiant.setBourse1((Bourse) combo3.getData(""+combo3.getSelectionIndex()));
+			etudiant.setBourse2((Bourse) combo4.getData(""+combo4.getSelectionIndex()));
+
 			Controller.getInstance().addEtudiant(etudiant);
 		}));
 	}
 
 	@Override
 	public void addEtudiant(final Etudiant etudiant) {
+		// get evaluations
+		final Evaluation evaluation1 = etudiant.getEvaluation1();
+		final Evaluation evaluation2 = etudiant.getEvaluation2();
+
 		final TableItem tableItem = new TableItem(tableEtudiant, SWT.NONE);
 		tableItem.setText(0, "" + etudiant.getNumeroEtu());
 		tableItem.setText(1, etudiant.getNom());
 		tableItem.setText(2, etudiant.getPrenom());
 		tableItem.setText(3, String.format("%2.1f", etudiant.getNoteMoyLastSemester()));
+
+		if (evaluation1 != null) {
+			final Enseignant enseignant1 = evaluation1.getEnseignant();
+			tableItem.setText(4,    enseignant1.getNom()+" "+enseignant1.getPrenom());
+			tableItem.setText(5, ""+evaluation1.getNote());
+		}
+
+		if (evaluation2 != null) {
+			final Enseignant enseignant2 = evaluation2.getEnseignant();
+			tableItem.setText(4,    enseignant2.getNom()+" "+enseignant2.getPrenom());
+			tableItem.setText(5, ""+evaluation2.getNote());
+		}
+
+		final Bourse bourse1 = etudiant.getBourse1();
+		if (bourse1 != null) {
+			tableItem.setText(8, bourse1.getDestination());
+		}
+
+		final Bourse bourse2 = etudiant.getBourse2();
+		if (bourse2 != null) {
+			tableItem.setText(8, bourse2.getDestination());
+		}
 	}
 
 	@Override

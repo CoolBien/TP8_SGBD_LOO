@@ -9,17 +9,16 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "Evaluation")
-
 public class Evaluation {
 
 	@Id
 	@GeneratedValue
 	@Column(name = "id")
 	private int id;
-	
+
 	@Column(name = "note")
 	private int note;
-	
+
 	@ManyToOne
 	private Enseignant enseignant;
 
@@ -27,7 +26,7 @@ public class Evaluation {
 		return note;
 	}
 
-	public void setNote(int note) {
+	public void setNote(final int note) {
 		this.note = note;
 	}
 
@@ -35,7 +34,7 @@ public class Evaluation {
 		return enseignant;
 	}
 
-	public void setEnseignant(Enseignant enseignant) {
+	public void setEnseignant(final Enseignant enseignant) {
 		this.enseignant = enseignant;
 	}
 
@@ -43,7 +42,7 @@ public class Evaluation {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(final int id) {
 		this.id = id;
 	}
 
