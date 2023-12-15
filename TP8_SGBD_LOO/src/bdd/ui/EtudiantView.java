@@ -29,11 +29,11 @@ import bdd.util.SWTUTils;
 public class EtudiantView implements IControllerListener {
 
 	private Table tableEtudiant;
-	private Combo combo;
-	private Combo combo20;
-	private Combo combo21;
-	private Combo combo3;
-	private Combo combo4;
+	private Combo comboEnseignement;
+	private Combo comboEnseignant1;
+	private Combo comboEnseignant2;
+	private Combo comboBourse1;
+	private Combo comboBourse2;
 
 
 	public EtudiantView(final TabFolder tabFolder) {
@@ -78,29 +78,29 @@ public class EtudiantView implements IControllerListener {
 		label.setLayoutData(new GridData(SWT.BEGINNING, SWT.CENTER, false, false));
 		label.setText("Nom");
 
-		final Text text = new Text(dataEtudiant, SWT.SINGLE | SWT.LEAD | SWT.BORDER);
-		text.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
+		final Text lastNameEntry = new Text(dataEtudiant, SWT.SINGLE | SWT.LEAD | SWT.BORDER);
+		lastNameEntry.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
 
 		final Label label1 = new Label(dataEtudiant, SWT.NONE);
 		label1.setLayoutData(new GridData(SWT.BEGINNING, SWT.CENTER, false, false));
 		label1.setText("Prenom");
 
-		final Text text1 = new Text(dataEtudiant, SWT.SINGLE | SWT.LEAD | SWT.BORDER);
-		text1.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
+		final Text firstNameEntry = new Text(dataEtudiant, SWT.SINGLE | SWT.LEAD | SWT.BORDER);
+		firstNameEntry.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
 
 		final Label label2 = new Label(dataEtudiant, SWT.NONE);
 		label2.setLayoutData(new GridData(SWT.BEGINNING, SWT.CENTER, false, false));
 		label2.setText("Note moyenne du dernier semestre");
 
-		final Text text2 = new Text(dataEtudiant, SWT.SINGLE | SWT.LEAD | SWT.BORDER);
-		text2.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
+		final Text noteEntry = new Text(dataEtudiant, SWT.SINGLE | SWT.LEAD | SWT.BORDER);
+		noteEntry.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
 
 		final Label label3 = new Label(dataEtudiant, SWT.NONE);
 		label3.setLayoutData(new GridData(SWT.BEGINNING, SWT.CENTER, false, false));
 		label3.setText("Enseignement");
 
-		combo = new Combo(dataEtudiant, SWT.DROP_DOWN | SWT.READ_ONLY);
-		combo.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
+		comboEnseignement = new Combo(dataEtudiant, SWT.DROP_DOWN | SWT.READ_ONLY);
+		comboEnseignement.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
 
 		for (final Enseignement e : Controller.getInstance().getEnseignements()) {
 			addEnseignement(e);
@@ -110,15 +110,15 @@ public class EtudiantView implements IControllerListener {
 		label4.setLayoutData(new GridData(SWT.BEGINNING, SWT.CENTER, false, false));
 		label4.setText("Enseignant 1");
 
-		combo20 = new Combo(dataEtudiant, SWT.DROP_DOWN | SWT.READ_ONLY);
-		combo20.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
+		comboEnseignant1 = new Combo(dataEtudiant, SWT.DROP_DOWN | SWT.READ_ONLY);
+		comboEnseignant1.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
 
 		final Label label7 = new Label(dataEtudiant, SWT.NONE);
 		label7.setLayoutData(new GridData(SWT.BEGINNING, SWT.CENTER, false, false));
 		label7.setText("Enseignant 2");
 
-		combo21 = new Combo(dataEtudiant, SWT.DROP_DOWN | SWT.READ_ONLY);
-		combo21.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
+		comboEnseignant2 = new Combo(dataEtudiant, SWT.DROP_DOWN | SWT.READ_ONLY);
+		comboEnseignant2.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
 
 		for (final Enseignant e : Controller.getInstance().getEnseignants()) {
 			addEnseignant(e);
@@ -128,21 +128,21 @@ public class EtudiantView implements IControllerListener {
 		label5.setLayoutData(new GridData(SWT.BEGINNING, SWT.CENTER, false, false));
 		label5.setText("Bourse 1");
 
-		combo3 = new Combo(dataEtudiant, SWT.DROP_DOWN | SWT.READ_ONLY);
-		combo3.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
-		combo3.add("Pas de bourse");
-		combo3.setText("Pas de bourse");
-		combo3.setData("0", null);
+		comboBourse1 = new Combo(dataEtudiant, SWT.DROP_DOWN | SWT.READ_ONLY);
+		comboBourse1.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
+		comboBourse1.add("Pas de bourse");
+		comboBourse1.setText("Pas de bourse");
+		comboBourse1.setData("0", null);
 
 		final Label label6 = new Label(dataEtudiant, SWT.NONE);
 		label6.setLayoutData(new GridData(SWT.BEGINNING, SWT.CENTER, false, false));
 		label6.setText("Bourse 2");
 
-		combo4 = new Combo(dataEtudiant, SWT.DROP_DOWN | SWT.READ_ONLY);
-		combo4.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
-		combo4.add("Pas de bourse");
-		combo4.setText("Pas de bourse");
-		combo4.setData("0", null);
+		comboBourse2 = new Combo(dataEtudiant, SWT.DROP_DOWN | SWT.READ_ONLY);
+		comboBourse2.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
+		comboBourse2.add("Pas de bourse");
+		comboBourse2.setText("Pas de bourse");
+		comboBourse2.setData("0", null);
 
 		for (final Bourse b : Controller.getInstance().getBourses()) {
 			addBourse(b);
@@ -152,27 +152,27 @@ public class EtudiantView implements IControllerListener {
 		label8.setLayoutData(new GridData(SWT.BEGINNING, SWT.CENTER, false, false));
 		label8.setText("Note 1");
 
-		final Text text3 = new Text(dataEtudiant, SWT.SINGLE | SWT.LEAD | SWT.BORDER);
-		text3.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
+		final Text noteEntry1 = new Text(dataEtudiant, SWT.SINGLE | SWT.LEAD | SWT.BORDER);
+		noteEntry1.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
 
 		final Label label9 = new Label(dataEtudiant, SWT.NONE);
 		label9.setLayoutData(new GridData(SWT.BEGINNING, SWT.CENTER, false, false));
 		label9.setText("Note 2");
 
-		final Text text4 = new Text(dataEtudiant, SWT.SINGLE | SWT.LEAD | SWT.BORDER);
-		text4.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
+		final Text noteEntry2 = new Text(dataEtudiant, SWT.SINGLE | SWT.LEAD | SWT.BORDER);
+		noteEntry2.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
 
 		final Button button = new Button(dataEtudiant, SWT.PUSH);
 		button.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false));
 		button.setText("Ajouter");
 		button.addSelectionListener(SelectionListener.widgetSelectedAdapter(e -> {
-			final String nom = text.getText();
-			final String prenom = text1.getText();
+			final String nom = lastNameEntry.getText();
+			final String prenom = firstNameEntry.getText();
 			float notemoy = 0;
 			float note1 = 0;
 			float note2 = 0;
 			try {
-				notemoy = Float.parseFloat(text2.getText());
+				notemoy = Float.parseFloat(noteEntry.getText());
 			} catch (final NumberFormatException exc) {
 				SWTUTils.showError(button.getShell(), "Pas un nombre",
 						"Veuillez mettre un nombre valide pour la note.");
@@ -187,7 +187,7 @@ public class EtudiantView implements IControllerListener {
 			}
 
 			try {
-				note1 = Float.parseFloat(text3.getText());
+				note1 = Float.parseFloat(noteEntry1.getText());
 			} catch (final NumberFormatException exc) {
 				SWTUTils.showError(button.getShell(), "Pas un nombre",
 						"Veuillez mettre un nombre valide pour la note.");
@@ -195,7 +195,7 @@ public class EtudiantView implements IControllerListener {
 				return;
 			}
 			try {
-				note2 = Float.parseFloat(text4.getText());
+				note2 = Float.parseFloat(noteEntry2.getText());
 			} catch (final NumberFormatException exc) {
 				SWTUTils.showError(button.getShell(), "Pas un nombre",
 						"Veuillez mettre un nombre valide pour la note.");
@@ -206,8 +206,8 @@ public class EtudiantView implements IControllerListener {
 			final Evaluation eval1 = new Evaluation();
 			final Evaluation eval2 = new Evaluation();
 
-			eval1.setEnseignant((Enseignant) combo20.getData(""+combo20.getSelectionIndex()));
-			eval2.setEnseignant((Enseignant) combo21.getData(""+combo21.getSelectionIndex()));
+			eval1.setEnseignant((Enseignant) comboEnseignant1.getData(""+(comboEnseignant1.getSelectionIndex())));
+			eval2.setEnseignant((Enseignant) comboEnseignant2.getData(""+(comboEnseignant2.getSelectionIndex())));
 
 			eval1.setNote(note1);
 			eval2.setNote(note2);
@@ -215,8 +215,8 @@ public class EtudiantView implements IControllerListener {
 			final Etudiant etudiant = new Etudiant(nom, prenom, 0, notemoy);
 			etudiant.setEvaluation1(eval1);
 			etudiant.setEvaluation2(eval2);
-			etudiant.setBourse1((Bourse) combo3.getData(""+combo3.getSelectionIndex()));
-			etudiant.setBourse2((Bourse) combo4.getData(""+combo4.getSelectionIndex()));
+			etudiant.setBourse1((Bourse) comboBourse1.getData(""+comboBourse1.getSelectionIndex()));
+			etudiant.setBourse2((Bourse) comboBourse2.getData(""+comboBourse2.getSelectionIndex()));
 
 			Controller.getInstance().addEtudiant(etudiant);
 		}));
@@ -259,23 +259,23 @@ public class EtudiantView implements IControllerListener {
 
 	@Override
 	public void addEnseignement(final Enseignement enseignement) {
-		combo.add(enseignement.getNom());
-		combo.setData(""+combo.getItemCount(), enseignement);
+		comboEnseignement.add(enseignement.getNom());
+		comboEnseignement.setData(""+comboEnseignement.getItemCount(), enseignement);
 	}
 
 	@Override
 	public void addEnseignant(final Enseignant enseignant) {
-		combo20.add(enseignant.getNom()+" "+enseignant.getPrenom());
-		combo20.setData(""+combo20.getItemCount(), enseignant);
-		combo21.add(enseignant.getNom()+" "+enseignant.getPrenom());
-		combo21.setData(""+combo21.getItemCount(), enseignant);
+		comboEnseignant1.setData(""+comboEnseignant1.getItemCount(), enseignant);
+		comboEnseignant2.setData(""+comboEnseignant2.getItemCount(), enseignant);
+		comboEnseignant1.add(enseignant.getNom()+" "+enseignant.getPrenom());
+		comboEnseignant2.add(enseignant.getNom()+" "+enseignant.getPrenom());
 	}
 
 	@Override
 	public void addBourse(final Bourse bourse) {
-		combo3.add(bourse.getDestination());
-		combo4.add(bourse.getDestination());
-		combo3.setData(""+combo3.getItemCount(), bourse);
-		combo4.setData(""+combo4.getItemCount(), bourse);
+		comboBourse1.add(bourse.getDestination());
+		comboBourse2.add(bourse.getDestination());
+		comboBourse1.setData(""+comboBourse1.getItemCount(), bourse);
+		comboBourse2.setData(""+comboBourse2.getItemCount(), bourse);
 	}
 }
