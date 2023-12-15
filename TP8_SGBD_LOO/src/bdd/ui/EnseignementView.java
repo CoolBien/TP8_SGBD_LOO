@@ -49,7 +49,7 @@ public class EnseignementView implements IControllerListener {
 		new TableColumn(tableEnseignement, SWT.LEAD).setText("Nombre crédit");
 		new TableColumn(tableEnseignement, SWT.LEAD).setText("Volume horaire");
 
-		for (final Enseignement e : Controller.getInstance().getEnseignement()) {
+		for (final Enseignement e : Controller.getInstance().getEnseignements()) {
 			addEnseignement(e);
 		}
 

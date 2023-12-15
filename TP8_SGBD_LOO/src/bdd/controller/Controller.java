@@ -75,23 +75,6 @@ public class Controller implements IControllerListener {
 	public void setSession(final Session session) {
 		this.session = session;
 		transaction = session.beginTransaction();
-
-		// Initialize everything
-		for (final Etudiant e : getEtudiants()) {
-			dispatchEvent(c -> c.addEtudiant(e));
-		}
-
-		for (final Enseignant e : getEnseignants()) {
-			dispatchEvent(c -> c.addEnseignant(e));
-		}
-
-		for (final Enseignement e : getEnseignements()) {
-			dispatchEvent(c -> c.addEnseignement(e));
-		}
-
-		for (final Bourse b : getBourses()) {
-			dispatchEvent(c -> c.addBourse(b));
-		}
 	}
 
 	public void endSession() {
@@ -136,7 +119,7 @@ public class Controller implements IControllerListener {
 	/**
 	 * @return la liste des {@link Enseignement enseignements}.
 	 */
-	public List<Enseignement> getEnseignement() {
+	public List<Enseignement> getEnseignements() {
 		return session.createQuery("FROM Enseignement", Enseignement.class).list();
 	}
 

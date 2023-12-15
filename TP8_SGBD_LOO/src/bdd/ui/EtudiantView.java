@@ -19,6 +19,8 @@ import org.eclipse.swt.widgets.Text;
 
 import bdd.controller.Controller;
 import bdd.controller.IControllerListener;
+import bdd.data.Bourse;
+import bdd.data.Enseignant;
 import bdd.data.Enseignement;
 import bdd.data.Etudiant;
 import bdd.util.SWTUTils;
@@ -27,6 +29,9 @@ public class EtudiantView implements IControllerListener {
 
 	private Table tableEtudiant;
 	private Combo combo;
+	private Combo combo2;
+	private Combo combo3;
+	private Combo combo4;
 
 	public EtudiantView(final TabFolder tabFolder) {
 		Controller.getInstance().addListener(this);
@@ -47,6 +52,10 @@ public class EtudiantView implements IControllerListener {
 		new TableColumn(tableEtudiant, SWT.LEAD).setText("NOM");
 		new TableColumn(tableEtudiant, SWT.LEAD).setText("Prénom");
 		new TableColumn(tableEtudiant, SWT.LEAD).setText("Note moyenne du dernier semestre");
+
+		for (final Etudiant e : Controller.getInstance().getEtudiants()) {
+			addEtudiant(e);
+		}
 
 		for (int i = 0; i < tableEtudiant.getColumnCount(); i++) {
 			tableEtudiant.getColumn(i).pack();
@@ -83,6 +92,39 @@ public class EtudiantView implements IControllerListener {
 
 		combo = new Combo(dataEtudiant, SWT.DROP_DOWN | SWT.READ_ONLY);
 		combo.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
+
+		for (final Enseignement e : Controller.getInstance().getEnseignements()) {
+			addEnseignement(e);
+		}
+
+		final Label label4 = new Label(dataEtudiant, SWT.NONE);
+		label4.setLayoutData(new GridData(SWT.BEGINNING, SWT.CENTER, false, false));
+		label4.setText("Enseignant");
+
+		combo2 = new Combo(dataEtudiant, SWT.DROP_DOWN | SWT.READ_ONLY);
+		combo2.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
+
+		for (final Enseignant e : Controller.getInstance().getEnseignants()) {
+			addEnseignant(e);
+		}
+
+		final Label label5 = new Label(dataEtudiant, SWT.NONE);
+		label5.setLayoutData(new GridData(SWT.BEGINNING, SWT.CENTER, false, false));
+		label5.setText("Bourse 1");
+
+		combo3 = new Combo(dataEtudiant, SWT.DROP_DOWN | SWT.READ_ONLY);
+		combo3.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
+
+		final Label label6 = new Label(dataEtudiant, SWT.NONE);
+		label6.setLayoutData(new GridData(SWT.BEGINNING, SWT.CENTER, false, false));
+		label6.setText("Bourse 2");
+
+		combo4 = new Combo(dataEtudiant, SWT.DROP_DOWN | SWT.READ_ONLY);
+		combo4.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
+
+		for (final Bourse b : Controller.getInstance().getBourses()) {
+			addBourse(b);
+		}
 
 		final Button button = new Button(dataEtudiant, SWT.PUSH);
 		button.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false));
@@ -122,5 +164,16 @@ public class EtudiantView implements IControllerListener {
 	@Override
 	public void addEnseignement(final Enseignement enseignement) {
 		combo.add(enseignement.getNom());
+	}
+
+	@Override
+	public void addEnseignant(final Enseignant enseignant) {
+		combo2.add(enseignant.getNom()+" "+enseignant.getPrenom());
+	}
+
+	@Override
+	public void addBourse(final Bourse bourse) {
+		combo3.add(bourse.getDestination());
+		combo4.add(bourse.getDestination());
 	}
 }
