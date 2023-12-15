@@ -39,6 +39,7 @@ public class Main {
 			new BourseView(tabFolder);
 
 			shell.addShellListener(ShellListener.shellClosedAdapter(s -> Controller.getInstance().endSession()));
+			shell.setText("Erasmus ++");
 			shell.pack();
 			shell.open();
 			while (!shell.isDisposed()) {
