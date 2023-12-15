@@ -110,6 +110,13 @@ public class EtudiantView implements IControllerListener {
 
 		comboEnseignant1 = new Combo(dataEtudiant, SWT.DROP_DOWN | SWT.READ_ONLY);
 		comboEnseignant1.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
+		
+		final Label label8 = new Label(dataEtudiant, SWT.NONE);
+		label8.setLayoutData(new GridData(SWT.BEGINNING, SWT.CENTER, false, false));
+		label8.setText("Note 1");
+
+		final Text noteEntry1 = new Text(dataEtudiant, SWT.SINGLE | SWT.LEAD | SWT.BORDER);
+		noteEntry1.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
 
 		final Label label7 = new Label(dataEtudiant, SWT.NONE);
 		label7.setLayoutData(new GridData(SWT.BEGINNING, SWT.CENTER, false, false));
@@ -121,6 +128,14 @@ public class EtudiantView implements IControllerListener {
 		for (final Enseignant e : Controller.getInstance().getEnseignants()) {
 			addEnseignant(e);
 		}
+		
+		final Label label9 = new Label(dataEtudiant, SWT.NONE);
+		label9.setLayoutData(new GridData(SWT.BEGINNING, SWT.CENTER, false, false));
+		label9.setText("Note 2");
+
+		final Text noteEntry2 = new Text(dataEtudiant, SWT.SINGLE | SWT.LEAD | SWT.BORDER);
+		noteEntry2.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
+
 
 		final Label label5 = new Label(dataEtudiant, SWT.NONE);
 		label5.setLayoutData(new GridData(SWT.BEGINNING, SWT.CENTER, false, false));
@@ -145,20 +160,6 @@ public class EtudiantView implements IControllerListener {
 		for (final Bourse b : Controller.getInstance().getBourses()) {
 			addBourse(b);
 		}
-
-		final Label label8 = new Label(dataEtudiant, SWT.NONE);
-		label8.setLayoutData(new GridData(SWT.BEGINNING, SWT.CENTER, false, false));
-		label8.setText("Note 1");
-
-		final Text noteEntry1 = new Text(dataEtudiant, SWT.SINGLE | SWT.LEAD | SWT.BORDER);
-		noteEntry1.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
-
-		final Label label9 = new Label(dataEtudiant, SWT.NONE);
-		label9.setLayoutData(new GridData(SWT.BEGINNING, SWT.CENTER, false, false));
-		label9.setText("Note 2");
-
-		final Text noteEntry2 = new Text(dataEtudiant, SWT.SINGLE | SWT.LEAD | SWT.BORDER);
-		noteEntry2.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
 
 		final Button button = new Button(dataEtudiant, SWT.PUSH);
 		button.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false));
