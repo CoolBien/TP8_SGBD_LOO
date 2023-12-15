@@ -75,6 +75,10 @@ public class EtudiantView implements IControllerListener {
 			tableEtudiant.getColumn(i).pack();
 		}
 
+		tableEtudiant.addSelectionListener(SelectionListener.widgetSelectedAdapter(c ->
+			Controller.getInstance().setSelectedEtudiant((Etudiant) tableEtudiant.getSelection()[0].getData()))
+		);
+
 		final Composite dataEtudiant = new Composite(leftComposite, SWT.NONE);
 		dataEtudiant.setLayoutData(new BorderData(SWT.TOP));
 		dataEtudiant.setLayout(new GridLayout(2, false));

@@ -84,6 +84,8 @@ public class Controller implements IControllerListener {
 
 	////////////////////////////////// CONTROLLER
 
+	private Etudiant selectedEtudiant;
+
 	@Override
 	public void addEtudiant(final Etudiant etudiant) {
 		session.save(etudiant);
@@ -94,6 +96,7 @@ public class Controller implements IControllerListener {
 			session.save(etudiant.getEvaluation2());
 		}
 		dispatchEvent(c -> c.addEtudiant(etudiant));
+		setSelectedEtudiant(etudiant);
 	}
 
 	/**
@@ -140,5 +143,11 @@ public class Controller implements IControllerListener {
 	 */
 	public List<Bourse> getBourses() {
 		return session.createQuery("FROM Bourse", Bourse.class).list();
+	}
+
+	@Override
+	public void setSelectedEtudiant(final Etudiant etudiant) {
+		selectedEtudiant = etudiant;
+		dispatchEvent(c -> c.setSelectedEtudiant(etudiant));
 	}
 }

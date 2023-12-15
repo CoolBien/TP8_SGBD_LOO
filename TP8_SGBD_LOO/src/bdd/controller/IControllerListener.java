@@ -7,11 +7,13 @@ import bdd.data.Etudiant;
 
 public interface IControllerListener {
 
-	default void addEtudiant(Etudiant etudiant) {}
+	default void addEtudiant(final Etudiant etudiant) {}
 
-	default void addEnseignant(Enseignant enseignant) {}
-	
-	default void addEnseignement(Enseignement enseignement) {}
-	
-	default void addBourse(Bourse bourse) {}
+	default void addEnseignant(final Enseignant enseignant) {}
+
+	default void addEnseignement(final Enseignement enseignement) {}
+
+	default void addBourse(final Bourse bourse) {}
+
+	default void setSelectedEtudiant(final Etudiant etudiant) {}
 }
