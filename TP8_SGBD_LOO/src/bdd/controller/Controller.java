@@ -150,4 +150,8 @@ public class Controller implements IControllerListener {
 		selectedEtudiant = etudiant;
 		dispatchEvent(c -> c.setSelectedEtudiant(etudiant));
 	}
+
+	public Etudiant getSelectedEtudiant() {
+		return selectedEtudiant;
+	}
 }

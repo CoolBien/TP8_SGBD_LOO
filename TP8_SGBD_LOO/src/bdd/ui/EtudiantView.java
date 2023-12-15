@@ -228,6 +228,8 @@ public class EtudiantView implements IControllerListener {
 		tableEnseignement.setLinesVisible(true);
 		tableEnseignement.setHeaderVisible(true);
 		new TableColumn(tableEnseignement, SWT.NONE).setText("Enseignement");
+		new TableColumn(tableEnseignement, SWT.NONE).setText("Volume Horaire");
+		new TableColumn(tableEnseignement, SWT.NONE).setText("Nombre crédits");
 
 		for (int i = 0; i < tableEnseignement.getColumnCount(); i++) {
 			tableEnseignement.getColumn(i).pack();
@@ -253,6 +255,8 @@ public class EtudiantView implements IControllerListener {
 		buttonAddEnseignement.setText("Ajouter un enseignement");
 		buttonAddEnseignement.addSelectionListener(SelectionListener.widgetSelectedAdapter(e -> {
 			//
+			final Enseignement enseignement = (Enseignement) comboEnseignement.getData(""+comboEnseignement.getSelectionIndex());
+			Controller.getInstance().getSelectedEtudiant().getPlanEnseignement().add(enseignement);
 		}));
 
 	}
@@ -294,8 +298,8 @@ public class EtudiantView implements IControllerListener {
 
 	@Override
 	public void addEnseignement(final Enseignement enseignement) {
-		comboEnseignement.add(enseignement.getNom());
 		comboEnseignement.setData(""+comboEnseignement.getItemCount(), enseignement);
+		comboEnseignement.add(enseignement.getNom());
 	}
 
 	@Override
@@ -312,5 +316,16 @@ public class EtudiantView implements IControllerListener {
 		comboBourse2.setData(""+comboBourse2.getItemCount(), bourse);
 		comboBourse1.add(bourse.getDestination());
 		comboBourse2.add(bourse.getDestination());
+	}
+
+	@Override
+	public void setSelectedEtudiant(final Etudiant etudiant) {
+		tableEnseignement.clearAll();
+		for (final Enseignement e: etudiant.getPlanEnseignement()) {
+			final TableItem item = new TableItem(tableEnseignement, SWT.NONE);
+			item.setText(0, e.getNom());
+			item.setText(1, ""+e.getVolumeHoraire());
+			item.setText(2, ""+e.getNombreCredit());
+		}
 	}
 }
