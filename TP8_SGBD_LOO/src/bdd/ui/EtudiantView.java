@@ -23,15 +23,18 @@ import bdd.data.Bourse;
 import bdd.data.Enseignant;
 import bdd.data.Enseignement;
 import bdd.data.Etudiant;
+import bdd.data.Evaluation;
 import bdd.util.SWTUTils;
 
 public class EtudiantView implements IControllerListener {
 
 	private Table tableEtudiant;
 	private Combo combo;
-	private Combo combo2;
+	private Combo combo20;
+	private Combo combo21;
 	private Combo combo3;
 	private Combo combo4;
+	
 
 	public EtudiantView(final TabFolder tabFolder) {
 		Controller.getInstance().addListener(this);
@@ -99,11 +102,18 @@ public class EtudiantView implements IControllerListener {
 
 		final Label label4 = new Label(dataEtudiant, SWT.NONE);
 		label4.setLayoutData(new GridData(SWT.BEGINNING, SWT.CENTER, false, false));
-		label4.setText("Enseignant");
+		label4.setText("Enseignant 1");
 
-		combo2 = new Combo(dataEtudiant, SWT.DROP_DOWN | SWT.READ_ONLY);
-		combo2.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
+		combo20 = new Combo(dataEtudiant, SWT.DROP_DOWN | SWT.READ_ONLY);
+		combo20.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
 
+		final Label label7 = new Label(dataEtudiant, SWT.NONE);
+		label7.setLayoutData(new GridData(SWT.BEGINNING, SWT.CENTER, false, false));
+		label7.setText("Enseignant 2");
+
+		combo21 = new Combo(dataEtudiant, SWT.DROP_DOWN | SWT.READ_ONLY);
+		combo21.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
+		
 		for (final Enseignant e : Controller.getInstance().getEnseignants()) {
 			addEnseignant(e);
 		}
@@ -131,7 +141,21 @@ public class EtudiantView implements IControllerListener {
 		for (final Bourse b : Controller.getInstance().getBourses()) {
 			addBourse(b);
 		}
+		
+		final Label label8 = new Label(dataEtudiant, SWT.NONE);
+		label8.setLayoutData(new GridData(SWT.BEGINNING, SWT.CENTER, false, false));
+		label8.setText("Note 1");
 
+		final Text text3 = new Text(dataEtudiant, SWT.SINGLE | SWT.LEAD | SWT.BORDER);
+		text3.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
+		
+		final Label label9 = new Label(dataEtudiant, SWT.NONE);
+		label9.setLayoutData(new GridData(SWT.BEGINNING, SWT.CENTER, false, false));
+		label9.setText("Note 2");
+
+		final Text text4 = new Text(dataEtudiant, SWT.SINGLE | SWT.LEAD | SWT.BORDER);
+		text4.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
+		
 		final Button button = new Button(dataEtudiant, SWT.PUSH);
 		button.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false));
 		button.setText("Ajouter");
@@ -139,6 +163,8 @@ public class EtudiantView implements IControllerListener {
 			final String nom = text.getText();
 			final String prenom = text1.getText();
 			float notemoy = 0;
+			float note1 = 0;
+			float note2 = 0;
 			try {
 				notemoy = Float.parseFloat(text2.getText());
 			} catch (final NumberFormatException exc) {
@@ -151,6 +177,22 @@ public class EtudiantView implements IControllerListener {
 				SWTUTils.showError(button.getShell(), "Nombre invalide",
 						"Veuillez mettre un nombre valide entre 0 et 20 pour la note.");
 				System.err.println("nombre invalide");
+				return;
+			}
+			try {
+				note1 = Float.parseFloat(text3.getText());
+			} catch (final NumberFormatException exc) {
+				SWTUTils.showError(button.getShell(), "Pas un nombre",
+						"Veuillez mettre un nombre valide pour la note.");
+				System.err.println("pas un nombre");
+				return;
+			}
+			try {
+				note2 = Float.parseFloat(text4.getText());
+			} catch (final NumberFormatException exc) {
+				SWTUTils.showError(button.getShell(), "Pas un nombre",
+						"Veuillez mettre un nombre valide pour la note.");
+				System.err.println("pas un nombre");
 				return;
 			}
 			final Etudiant etudiant = new Etudiant(nom, prenom, 0, notemoy);
@@ -175,8 +217,10 @@ public class EtudiantView implements IControllerListener {
 
 	@Override
 	public void addEnseignant(final Enseignant enseignant) {
-		combo2.add(enseignant.getNom()+" "+enseignant.getPrenom());
-		combo2.setData(""+combo2.getItemCount(), enseignant);
+		combo20.add(enseignant.getNom()+" "+enseignant.getPrenom());
+		combo20.setData(""+combo20.getItemCount(), enseignant);
+		combo21.add(enseignant.getNom()+" "+enseignant.getPrenom());
+		combo21.setData(""+combo21.getItemCount(), enseignant);
 	}
 
 	@Override
