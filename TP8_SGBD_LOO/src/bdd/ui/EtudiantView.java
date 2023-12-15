@@ -164,16 +164,20 @@ public class EtudiantView implements IControllerListener {
 	@Override
 	public void addEnseignement(final Enseignement enseignement) {
 		combo.add(enseignement.getNom());
+		combo.setData(""+combo.getItemCount(), enseignement);
 	}
 
 	@Override
 	public void addEnseignant(final Enseignant enseignant) {
 		combo2.add(enseignant.getNom()+" "+enseignant.getPrenom());
+		combo2.setData(""+combo2.getItemCount(), enseignant);
 	}
 
 	@Override
 	public void addBourse(final Bourse bourse) {
 		combo3.add(bourse.getDestination());
 		combo4.add(bourse.getDestination());
+		combo3.setData(""+combo3.getItemCount(), bourse);
+		combo4.setData(""+combo4.getItemCount(), bourse);
 	}
 }
