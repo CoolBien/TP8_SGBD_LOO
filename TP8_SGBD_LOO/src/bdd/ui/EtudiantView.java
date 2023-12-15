@@ -55,9 +55,9 @@ public class EtudiantView implements IControllerListener {
 		new TableColumn(tableEtudiant, SWT.LEAD).setText("NOM");
 		new TableColumn(tableEtudiant, SWT.LEAD).setText("Prénom");
 		new TableColumn(tableEtudiant, SWT.LEAD).setText("Note moyenne du dernier semestre");
-		new TableColumn(tableEtudiant, SWT.LEAD).setText("Enseigant 1");
+		new TableColumn(tableEtudiant, SWT.LEAD).setText("Enseignant 1");
 		new TableColumn(tableEtudiant, SWT.LEAD).setText("Note 1");
-		new TableColumn(tableEtudiant, SWT.LEAD).setText("Enseigant 2");
+		new TableColumn(tableEtudiant, SWT.LEAD).setText("Enseignant 2");
 		new TableColumn(tableEtudiant, SWT.LEAD).setText("Note 2");
 		new TableColumn(tableEtudiant, SWT.LEAD).setText("Bourse 1");
 		new TableColumn(tableEtudiant, SWT.LEAD).setText("Bourse 2");
