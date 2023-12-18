@@ -157,7 +157,9 @@ public class Controller implements IControllerListener {
 
 	@Override
 	public void addEnseignementToSelectedEtudiant(final Enseignement enseignement) {
-		selectedEtudiant.getPlanEnseignement().add(enseignement);
-		dispatchEvent(c -> c.addEnseignementToSelectedEtudiant(enseignement));
+		if (selectedEtudiant != null) {
+			selectedEtudiant.getPlanEnseignement().add(enseignement);
+			dispatchEvent(c -> c.addEnseignementToSelectedEtudiant(enseignement));
+		}
 	}
 }
