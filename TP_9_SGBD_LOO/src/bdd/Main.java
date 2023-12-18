@@ -1,8 +1,9 @@
 package bdd;
 
 public class Main {
-	public static void main(final String[] args) throws Exception {
 
+	public static void main(String[] args) {
 		System.out.println("Hello world");
 	}
+
 }
