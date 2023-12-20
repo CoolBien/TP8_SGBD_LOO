@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import bdd.cli.MedecinView;
 import bdd.cli.UserView;
 import bdd.util.Utils;
 
@@ -20,7 +21,7 @@ public class Main {
 		while (true) {
 			final String answer = Utils.prompt("Êtes vous un [M]édecin ou un [U]tilisateur ?").toUpperCase();
 			if (answer.startsWith("M")) {
-				// TODO
+				new MedecinView(conn);
 			} else if(answer.startsWith("U")) {
 				new UserView(conn);
 				System.out.println("fin");

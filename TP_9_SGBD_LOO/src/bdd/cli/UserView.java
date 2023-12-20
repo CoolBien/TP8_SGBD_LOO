@@ -85,7 +85,7 @@ public class UserView {
 		}
 	}
 
-	private void onConnected() {
+	private void onConnected() throws SQLException {
 		System.out.println("Vous êtes connecté.");
 		while (true) {
 			System.out.println("Que voulez-vous faire ?");
@@ -94,6 +94,7 @@ public class UserView {
 			final String answer = Utils.prompt(">").toUpperCase();
 			switch (answer.charAt(0)) {
 			case 'R' -> {
+				reserver();
 			}
 			case 'P' -> {
 			}
@@ -101,6 +102,31 @@ public class UserView {
 				System.err.println("Mauvais choix");
 			}
 			}
+		}
+	}
+
+	private void reserver() throws SQLException {
+		System.out.println("Réserver");
+		while (true) {
+			System.out.println("Quoi (Type_d_analyse) ?");
+			final ResultSet set = c.createStatement().executeQuery("SELECT ID_Type_Analyse, Hemogramme, Groupe_Sanguin, Vitesse_de_sedimentation FROM Type_d_analyse;");
+			System.out.println("[0]\tAnnuler");
+			while (set.next()) {
+				System.out.println("["+set.getInt(1)+"]\t"+set.getString(2)+"\t"+set.getString(3)+"\t"+set.getString(4)+"\t");
+			}
+			final String answer = Utils.prompt(">").toUpperCase();
+			int typeAnalyse = -1;
+			while (typeAnalyse < 0) {
+				try {
+					typeAnalyse = Integer.parseInt(answer);
+				} catch (final NumberFormatException e) {
+					typeAnalyse = -1;
+				}
+			}
+			if (typeAnalyse == 0) {	// cancel
+				return;
+			}
+			System.out.println("Le type d'analyse est "+typeAnalyse);
 		}
 	}
 }
