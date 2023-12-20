@@ -12,7 +12,7 @@ public class Main {
 
 	public Main(final Connection conn) throws SQLException {
 		while (true) {
-			final String answer = Utils.prompt("Êtes vous un [M]édecin ou un [U]tilisateur ?").toLowerCase();
+			final String answer = Utils.prompt("Êtes vous un [M]édecin ou un [U]tilisateur ?").toUpperCase();
 			if (answer.startsWith("M")) {
 				// TODO
 			} else if(answer.startsWith("U")) {
@@ -89,7 +89,7 @@ public class Main {
 
 		// Connexion
 		try (
-			final Connection conn = DriverManager.getConnection("jdbc:mariadb://127.0.0.1/tp", "root", "");
+			final Connection conn = DriverManager.getConnection("jdbc:mariadb://127.0.0.1/medecin", "root", "");
 		) {
 			new Main(conn);
 		} catch (final SQLException e) {
