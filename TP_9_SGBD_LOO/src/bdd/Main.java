@@ -23,11 +23,13 @@ public class Main {
 				// TODO
 			} else if(answer.startsWith("U")) {
 				new UserView(conn);
+				System.out.println("fin");
 				return;
 			} else if (answer.startsWith("R")) {
 				resetDataBase(conn);
 				continue;
 			} else if (answer.isBlank()) {
+				System.out.println("fin");
 				return;
 			}
 			System.err.println("Choix incorrect.");

@@ -86,7 +86,21 @@ public class UserView {
 	}
 
 	private void onConnected() {
-		System.out.println("Vous êtes connecté. Que faire ?");
-
+		System.out.println("Vous êtes connecté.");
+		while (true) {
+			System.out.println("Que voulez-vous faire ?");
+			System.out.println(" - [R] Réserver");
+			System.out.println(" - [P] Payer");
+			final String answer = Utils.prompt(">").toUpperCase();
+			switch (answer.charAt(0)) {
+			case 'R' -> {
+			}
+			case 'P' -> {
+			}
+			default -> {
+				System.err.println("Mauvais choix");
+			}
+			}
+		}
 	}
 }
