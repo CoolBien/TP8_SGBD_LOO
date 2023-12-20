@@ -4,16 +4,26 @@ import java.util.Date;
 
 public class Reservation {
 
+	private int idReservation;
 	private Date dateDebut;
 	private Date dateFin;
 	private float prixaPayer;
 	private float prixDejaPaye;
 
-	public Reservation(final Date dateDebut, final Date dateFin, final float prixaPayer, final float prixDejaPaye) {
+	public Reservation(final int idReservation, final Date dateDebut, final Date dateFin, final float prixaPayer, final float prixDejaPaye) {
+		this.idReservation = idReservation;
 		this.dateDebut = dateDebut;
 		this.dateFin = dateFin;
 		this.prixaPayer = prixaPayer;
 		this.prixDejaPaye = prixDejaPaye;
+	}
+
+	public int getIdReservation() {
+		return idReservation;
+	}
+
+	public void setIdReservation(int idReservation) {
+		this.idReservation = idReservation;
 	}
 
 	public Date getDateDebut() {

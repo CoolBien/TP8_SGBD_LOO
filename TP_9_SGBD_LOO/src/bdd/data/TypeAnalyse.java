@@ -1,25 +1,32 @@
 package bdd.data;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class TypeAnalyse {
 
-	private List<String> hemogramme = new ArrayList();
+	private int idTypeAnalyse;
+	private String hemogramme;
 	private String groupeSanguin;
 	private float vitesseSedimentation;
 
-	public TypeAnalyse(final List<String> hemogramme, final String groupeSanguin, final float vitesseSedimentation) {
+	public TypeAnalyse(final int idTypeAnalyse, final String hemogramme, final String groupeSanguin, final float vitesseSedimentation) {
+		this.idTypeAnalyse = idTypeAnalyse;
 		this.hemogramme = hemogramme;
 		this.groupeSanguin = groupeSanguin;
 		this.vitesseSedimentation = vitesseSedimentation;
 	}
 
-	public List<String> getHemogramme() {
+	public int getIdTypeAnalyse() {
+		return idTypeAnalyse;
+	}
+
+	public void setIdTypeAnalyse(int idTypeAnalyse) {
+		this.idTypeAnalyse = idTypeAnalyse;
+	}
+
+	public String getHemogramme() {
 		return hemogramme;
 	}
 
-	public void setHemogramme(List<String> hemogramme) {
+	public void setHemogramme(String hemogramme) {
 		this.hemogramme = hemogramme;
 	}
 
@@ -38,6 +45,5 @@ public class TypeAnalyse {
 	public void setVitesseSedimentation(float vitesseSedimentation) {
 		this.vitesseSedimentation = vitesseSedimentation;
 	}
-	
-	
+
 }
