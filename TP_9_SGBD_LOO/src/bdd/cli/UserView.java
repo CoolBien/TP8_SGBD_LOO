@@ -1,15 +1,16 @@
 package bdd.cli;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
-import bdd.data.Utilisateur;
 import bdd.util.Utils;
 
 public class UserView {
 
 	private final Connection c;
 
-	public UserView(final Connection c) {
+	public UserView(final Connection c) throws SQLException {
 		this.c = c;
 		System.out.println("Vous êtes un utilisateur.");
 		while (true) {
@@ -33,7 +34,7 @@ public class UserView {
 		}
 	}
 
-	private void inscription() {
+	private void inscription() throws SQLException {
 		System.out.println("Veuillez renseigner");
 		String answer = "";
 		String name = "";
@@ -50,8 +51,11 @@ public class UserView {
 		while (firstName.isBlank()) {
 			firstName = Utils.prompt("Prénom: ").toLowerCase();
 		}
-		final Utilisateur user = new Utilisateur(0, name, firstName, ssn);
-		c.prepareStatement("INSERT INTO User")
+		final PreparedStatement statement = c.prepareStatement("INSERT INTO Utilisateur(Nom, prenom, Num_Securite_Sociale) VALUES (?, ?, ?);");
+		statement.setString(1, name);
+		statement.setString(2, firstName);
+		statement.setInt(3, ssn);
+		statement.execute();
 	}
 
 	private void connexion() {
