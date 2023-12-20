@@ -17,7 +17,7 @@ public class UserView {
 			System.out.println("Que voulez-vous faire ?");
 			System.out.println(" - [C] Se connecter");
 			System.out.println(" - [I] S'inscrire");
-			final String answer = Utils.prompt(">").toLowerCase();
+			final String answer = Utils.prompt(">").toUpperCase();
 			switch (answer.charAt(0)) {
 			case 'C' -> {
 				connexion();
@@ -41,7 +41,7 @@ public class UserView {
 		String firstName = "";
 		int ssn = 0;
 		while (answer.isBlank()) {
-			answer = Utils.prompt("N° Sécu social: ").toLowerCase();
+			answer = Utils.prompt("N° Sécu social: ").toUpperCase();
 			try { ssn = Integer.parseInt(answer);}
 			catch (final Exception e) {answer="";}
 		}
