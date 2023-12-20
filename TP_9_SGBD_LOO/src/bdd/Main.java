@@ -70,7 +70,7 @@ public class Main {
 				+ "   Date_fin DATETIME,\r\n"
 				+ "   Prix_a_payer FLOAT,\r\n"
 				+ "   Prix_deja_paye FLOAT,\r\n"
-				+ "   ID_Medecin INT NOT NULL,\r\n"
+				+ "   ID_Medecin INT,\r\n"
 				+ "   ID_Type_Analyse INT NOT NULL,\r\n"
 				+ "   ID_Utilisateur INT NOT NULL,\r\n"
 				+ "   PRIMARY KEY(ID_Reservation_),\r\n"
