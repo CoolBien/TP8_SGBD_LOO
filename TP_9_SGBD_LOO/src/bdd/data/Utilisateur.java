@@ -2,14 +2,24 @@ package bdd.data;
 
 public class Utilisateur {
 
+	private int idUtilisateur;
 	private String name;
 	private String firstName;
 	private int ssn;
 
-	public Utilisateur(final String name, final String firstName, final int ssn) {
+	public Utilisateur(final int idUtilisateur, final String name, final String firstName, final int ssn) {
+		this.idUtilisateur = idUtilisateur;
 		this.name = name;
 		this.firstName = firstName;
 		this.ssn = ssn;
+	}
+
+	public int getIdUtilisateur() {
+		return idUtilisateur;
+	}
+
+	public void setIdUtilisateur(int idUtilisateur) {
+		this.idUtilisateur = idUtilisateur;
 	}
 
 	/**

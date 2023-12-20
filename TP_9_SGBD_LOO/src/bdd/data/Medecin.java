@@ -2,16 +2,26 @@ package bdd.data;
 
 public class Medecin {
 
+	private int idMedecin;
 	private String name;
 	private String firstName;
 	private int ssn;
 	private float salary;
 
-	public Medecin(final String name, final String firstName, final int ssn, final float salary) {
+	public Medecin(final int idMedecin, final String name, final String firstName, final int ssn, final float salary) {
+		this.idMedecin = idMedecin;
 		this.name = name;
 		this.firstName = firstName;
 		this.ssn = ssn;
 		this.salary = salary;
+	}
+
+	public int getId() {
+		return idMedecin;
+	}
+
+	public void setId(int idMedecin) {
+		this.idMedecin = idMedecin;
 	}
 
 	/**
