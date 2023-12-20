@@ -22,9 +22,10 @@ public class UserView {
 			final String answer = Utils.prompt(">").toUpperCase();
 			switch (answer.charAt(0)) {
 			case 'C' -> {
-				connexion();
-				onConnected();
-				return;
+				if (connexion()) {
+					onConnected();
+					return;
+				}
 			}
 			case 'I' -> {
 				inscription();
@@ -66,7 +67,7 @@ public class UserView {
 		}
 	}
 
-	private void connexion() throws SQLException {
+	private boolean connexion() throws SQLException {
 		System.out.println("Veuillez renseigner");
 		String answer = "";
 		int ssn = 0;
@@ -76,8 +77,11 @@ public class UserView {
 			catch (final Exception e) {answer="";}
 		}
 		final ResultSet result = c.createStatement().executeQuery("SELECT ID_Utilisateur FROM Utilisateur WHERE Num_Securite_Sociale=" + ssn);
-		while (result.next()) {
+		if (result.next()) {
 			idUser = result.getInt(1);
+			return true;
+		} else {
+			return false;
 		}
 	}
 
@@ -85,5 +89,4 @@ public class UserView {
 		System.out.println("Vous êtes connecté. Que faire ?");
 
 	}
-
 }
