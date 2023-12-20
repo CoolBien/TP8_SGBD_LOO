@@ -11,6 +11,12 @@ import bdd.util.Utils;
 public class Main {
 
 	public Main(final Connection conn) throws SQLException {
+		final Statement statement = conn.createStatement();
+		try {
+			statement.execute("USE medecin;");
+		} catch (final SQLException e) {
+			resetDataBase(conn);
+		}
 		while (true) {
 			final String answer = Utils.prompt("Êtes vous un [M]édecin ou un [U]tilisateur ?").toUpperCase();
 			if (answer.startsWith("M")) {
@@ -90,7 +96,7 @@ public class Main {
 
 		// Connexion
 		try (
-			final Connection conn = DriverManager.getConnection("jdbc:mariadb://127.0.0.1/medecin", "root", "");
+			final Connection conn = DriverManager.getConnection("jdbc:mariadb://127.0.0.1/", "root", "");
 		) {
 			new Main(conn);
 		} catch (final SQLException e) {
