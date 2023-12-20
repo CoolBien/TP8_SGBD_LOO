@@ -20,6 +20,7 @@ public class Main {
 				return;
 			} else if (answer.startsWith("R")) {
 				resetDataBase(conn);
+				continue;
 			} else if (answer.isBlank()) {
 				return;
 			}
@@ -37,7 +38,7 @@ public class Main {
 				+ "   Nom VARCHAR(50) NOT NULL,\r\n"
 				+ "   Prenom VARCHAR(50),\r\n"
 				+ "   Num_Securite_Sociale INT,\r\n"
-				+ "   Salaire CURRENCY,\r\n"
+				+ "   Salaire FLOAT,\r\n"
 				+ "   PRIMARY KEY(ID_Medecin)\r\n"
 				+ ");");
 		statement.execute("CREATE TABLE Utilisateur(\r\n"
@@ -58,8 +59,8 @@ public class Main {
 				+ "   ID_Reservation_ INT,\r\n"
 				+ "   Date_debut DATETIME,\r\n"
 				+ "   Date_fin DATETIME,\r\n"
-				+ "   Prix_a_payer CURRENCY,\r\n"
-				+ "   Prix_deja_paye CURRENCY,\r\n"
+				+ "   Prix_a_payer FLOAT,\r\n"
+				+ "   Prix_deja_paye FLOAT,\r\n"
 				+ "   ID_Medecin INT NOT NULL,\r\n"
 				+ "   ID_Type_Analyse INT NOT NULL,\r\n"
 				+ "   ID_Utilisateur INT NOT NULL,\r\n"
