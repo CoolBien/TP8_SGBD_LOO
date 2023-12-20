@@ -111,22 +111,31 @@ public class UserView {
 			System.out.println("Quoi (Type_d_analyse) ?");
 			final ResultSet set = c.createStatement().executeQuery("SELECT ID_Type_Analyse, Hemogramme, Groupe_Sanguin, Vitesse_de_sedimentation FROM Type_d_analyse;");
 			System.out.println("[0]\tAnnuler");
+			int nbAnalyse = 0;
 			while (set.next()) {
 				System.out.println("["+set.getInt(1)+"]\t"+set.getString(2)+"\t"+set.getString(3)+"\t"+set.getString(4)+"\t");
+				nbAnalyse++;
 			}
-			final String answer = Utils.prompt(">").toUpperCase();
 			int typeAnalyse = -1;
 			while (typeAnalyse < 0) {
 				try {
+					final String answer = Utils.prompt(">").toUpperCase();
 					typeAnalyse = Integer.parseInt(answer);
 				} catch (final NumberFormatException e) {
 					typeAnalyse = -1;
+					System.err.println("Nombre invalide");
 				}
 			}
 			if (typeAnalyse == 0) {	// cancel
 				return;
 			}
+			if (typeAnalyse < 0 || typeAnalyse > nbAnalyse) {
+				System.err.println("Choix invalide");
+				continue;
+			}
 			System.out.println("Le type d'analyse est "+typeAnalyse);
+			c.createStatement().execute("INSERT INTO Reservation (ID_Type_Analyse, ID_Utilisateur) VALUES ("+typeAnalyse+", "+idUser+");");
+			return;
 		}
 	}
 }
