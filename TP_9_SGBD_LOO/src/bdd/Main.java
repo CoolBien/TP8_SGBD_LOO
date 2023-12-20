@@ -34,7 +34,7 @@ public class Main {
 		statement.execute("CREATE DATABASE medecin;");
 		statement.execute("USE medecin;");
 		statement.execute("CREATE TABLE Medecin(\r\n"
-				+ "   ID_Medecin INT,\r\n"
+				+ "   ID_Medecin INT AUTO_INCREMENT,\r\n"
 				+ "   Nom VARCHAR(50) NOT NULL,\r\n"
 				+ "   Prenom VARCHAR(50),\r\n"
 				+ "   Num_Securite_Sociale INT,\r\n"
@@ -42,21 +42,21 @@ public class Main {
 				+ "   PRIMARY KEY(ID_Medecin)\r\n"
 				+ ");");
 		statement.execute("CREATE TABLE Utilisateur(\r\n"
-				+ "   ID_Utilisateur INT,\r\n"
+				+ "   ID_Utilisateur INT AUTO_INCREMENT,\r\n"
 				+ "   Nom VARCHAR(50),\r\n"
 				+ "   Prenom VARCHAR(50),\r\n"
 				+ "   Num_Securite_Sociale INT,\r\n"
 				+ "   PRIMARY KEY(ID_Utilisateur)\r\n"
 				+ ");");
 		statement.execute("CREATE TABLE Type_d_analyse(\r\n"
-				+ "   ID_Type_Analyse INT,\r\n"
+				+ "   ID_Type_Analyse INT AUTO_INCREMENT,\r\n"
 				+ "   Hemogramme VARCHAR(50),\r\n"
 				+ "   Groupe_Sanguin VARCHAR(3),\r\n"
 				+ "   Vitesse_de_sedimentation DOUBLE,\r\n"
 				+ "   PRIMARY KEY(ID_Type_Analyse)\r\n"
 				+ ");");
 		statement.execute("CREATE TABLE Reservation(\r\n"
-				+ "   ID_Reservation_ INT,\r\n"
+				+ "   ID_Reservation_ INT AUTO_INCREMENT,\r\n"
 				+ "   Date_debut DATETIME,\r\n"
 				+ "   Date_fin DATETIME,\r\n"
 				+ "   Prix_a_payer FLOAT,\r\n"
@@ -71,7 +71,7 @@ public class Main {
 				+ ");");
 		statement.execute("\r\n"
 				+ "CREATE TABLE Autorisation(\r\n"
-				+ "   ID_Medecin INT,\r\n"
+				+ "   ID_Medecin INT AUTO_INCREMENT,\r\n"
 				+ "   ID_Type_Analyse INT,\r\n"
 				+ "   PRIMARY KEY(ID_Medecin, ID_Type_Analyse),\r\n"
 				+ "   FOREIGN KEY(ID_Medecin) REFERENCES Medecin(ID_Medecin),\r\n"
