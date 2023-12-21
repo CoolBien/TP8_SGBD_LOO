@@ -57,10 +57,7 @@ public class InscriptionView {
 					final Utilisateur user = new Utilisateur(name, firstName, ssn);
 					Controller.getInstance().addUtilisateur(user);
 
-					final Composite parent = composite.getParent();
-					composite.dispose();
-					new UtilisateurView(parent, user);
-					parent.getShell().layout(true, true);
+					SWTUTils.showInfo(button.getShell(), "Nouvel utilisateur", "L'utilisateur a été créé ! Connectez-vous maintenant.");
 
 				} catch (final Exception exc) {
 					exc.printStackTrace();
