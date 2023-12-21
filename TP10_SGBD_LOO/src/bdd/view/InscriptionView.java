@@ -54,11 +54,12 @@ public class InscriptionView {
 					final String firstName = firstNameText.getText();
 					final int ssn = Integer.parseInt(numeroText.getText());
 
-					Controller.getInstance().addUtilisateur(new Utilisateur(name, firstName, ssn));
+					final Utilisateur user = new Utilisateur(name, firstName, ssn);
+					Controller.getInstance().addUtilisateur(user);
 
 					final Composite parent = composite.getParent();
 					composite.dispose();
-					new UtilisateurView(parent);
+					new UtilisateurView(parent, user);
 					parent.getShell().layout(true, true);
 
 				} catch (final Exception exc) {

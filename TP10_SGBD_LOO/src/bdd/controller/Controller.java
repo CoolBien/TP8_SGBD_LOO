@@ -6,7 +6,6 @@ import java.util.function.Consumer;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-
 import bdd.data.TypeAnalyse;
 import bdd.data.Utilisateur;
 
@@ -85,6 +84,22 @@ public class Controller implements IControllerListener {
 	public void addUtilisateur(final Utilisateur utilisateur) {
 		session.save(utilisateur);
 		dispatchEvent(c -> c.addUtilsiateur(utilisateur));
+	}
+
+	public Utilisateur getUtilisateurWithSSN(final int ssn) {
+		for (final Utilisateur u: getUtilisateurs()) {
+			if (u.getSnn() == ssn) {
+				return u;
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * @return la liste des {@link Utilisateur utilisateurs}.
+	 */
+	public List<Utilisateur> getUtilisateurs() {
+		return session.createQuery("FROM Utilisateur", Utilisateur.class).list();
 	}
 
 	/**
