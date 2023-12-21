@@ -6,6 +6,8 @@ import java.util.function.Consumer;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+
+import bdd.data.Reservation;
 import bdd.data.TypeAnalyse;
 import bdd.data.Utilisateur;
 
@@ -93,6 +95,11 @@ public class Controller implements IControllerListener {
 			}
 		}
 		return null;
+	}
+
+	public void addReservation(final Reservation reservation) {
+		session.save(reservation);
+		dispatchEvent(c -> c.addReservation(reservation));
 	}
 
 	/**

@@ -22,7 +22,5 @@ public class PayerView {
 		final Label label = new Label(composite, SWT.NONE);
 		label.setLayoutData(new GridData(SWT.BEGINNING, SWT.CENTER, false, false));
 		label.setText("Payez !!!!!");
-
 	}
-
 }

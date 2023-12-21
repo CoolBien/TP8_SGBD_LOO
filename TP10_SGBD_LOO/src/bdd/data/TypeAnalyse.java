@@ -24,17 +24,23 @@ public class TypeAnalyse {
 	@Column(name = "vitesseSedimentation")
 	private float vitesseSedimentation;
 
-	public TypeAnalyse(final String hemogramme, final String groupeSanguin, final float vitesseSedimentation) {
+	@Column(name = "prix")
+	private float prix;
+
+	public TypeAnalyse() {}
+
+	public TypeAnalyse(final String hemogramme, final String groupeSanguin, final float vitesseSedimentation, final float prix) {
 		this.hemogramme = hemogramme;
 		this.groupeSanguin = groupeSanguin;
 		this.vitesseSedimentation = vitesseSedimentation;
+		this.prix = prix;
 	}
 
 	public int getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(final int id) {
 		this.id = id;
 	}
 
@@ -42,7 +48,7 @@ public class TypeAnalyse {
 		return hemogramme;
 	}
 
-	public void setHemogramme(String hemogramme) {
+	public void setHemogramme(final String hemogramme) {
 		this.hemogramme = hemogramme;
 	}
 
@@ -50,7 +56,7 @@ public class TypeAnalyse {
 		return groupeSanguin;
 	}
 
-	public void setGroupeSanguin(String groupeSanguin) {
+	public void setGroupeSanguin(final String groupeSanguin) {
 		this.groupeSanguin = groupeSanguin;
 	}
 
@@ -58,8 +64,22 @@ public class TypeAnalyse {
 		return vitesseSedimentation;
 	}
 
-	public void setVitesseSedimentation(float vitesseSedimentation) {
+	public void setVitesseSedimentation(final float vitesseSedimentation) {
 		this.vitesseSedimentation = vitesseSedimentation;
+	}
+
+	/**
+	 * @return the prix
+	 */
+	public float getPrix() {
+		return prix;
+	}
+
+	/**
+	 * @param prix : the prix to set
+	 */
+	public void setPrix(final float prix) {
+		this.prix = prix;
 	}
 
 }

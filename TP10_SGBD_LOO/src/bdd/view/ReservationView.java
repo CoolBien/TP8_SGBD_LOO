@@ -35,5 +35,4 @@ public class ReservationView {
 			combo.setData(type.toString(), type);
 		}
 	}
-
 }
