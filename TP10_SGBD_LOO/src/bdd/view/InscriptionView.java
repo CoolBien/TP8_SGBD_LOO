@@ -32,8 +32,8 @@ public class InscriptionView {
 		firstNametext.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
 
 		final Label numeroLabel = new Label(data, SWT.NONE);
-		firstNamelabel.setLayoutData(new GridData(SWT.BEGINNING, SWT.CENTER, false, false));
-		firstNamelabel.setText("N° Sécu");
+		numeroLabel.setLayoutData(new GridData(SWT.BEGINNING, SWT.CENTER, false, false));
+		numeroLabel.setText("N° Sécu");
 
 		final Text numeroText = new Text(data, SWT.SINGLE | SWT.LEAD | SWT.BORDER);
 		numeroText.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
