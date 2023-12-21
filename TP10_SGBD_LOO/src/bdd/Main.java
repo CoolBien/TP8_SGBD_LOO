@@ -31,7 +31,7 @@ public class Main {
 
 			final Composite composite = new Composite(shell, SWT.NONE);
 			composite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
-			composite.setLayout(new GridLayout(2, false));
+			composite.setLayout(new GridLayout(2, true));
 
 			new ConnexionView(composite);
 			new InscriptionView(composite);

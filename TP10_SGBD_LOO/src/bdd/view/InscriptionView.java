@@ -7,8 +7,13 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
+
+import bdd.controller.Controller;
+import bdd.data.Utilisateur;
+import bdd.util.SWTUTils;
 
 public class InscriptionView {
 
@@ -28,8 +33,8 @@ public class InscriptionView {
 		firstNamelabel.setLayoutData(new GridData(SWT.BEGINNING, SWT.CENTER, false, false));
 		firstNamelabel.setText("Prénom");
 
-		final Text firstNametext = new Text(data, SWT.SINGLE | SWT.LEAD | SWT.BORDER);
-		firstNametext.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
+		final Text firstNameText = new Text(data, SWT.SINGLE | SWT.LEAD | SWT.BORDER);
+		firstNameText.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
 
 		final Label numeroLabel = new Label(data, SWT.NONE);
 		numeroLabel.setLayoutData(new GridData(SWT.BEGINNING, SWT.CENTER, false, false));
@@ -44,7 +49,16 @@ public class InscriptionView {
 		button.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(final SelectionEvent e) {
-				System.out.println("TODO connexion");
+				try {
+					final String name = nameText.getText();
+					final String firstName = firstNameText.getText();
+					final int ssn = Integer.parseInt(numeroText.getText());
+
+					Controller.getInstance().addUtilisateur(new Utilisateur(name, firstName, ssn));
+				} catch (final Exception exc) {
+					exc.printStackTrace();
+					SWTUTils.showError(Display.getCurrent().getActiveShell(), exc);
+				}
 			}
 		});
 	}
