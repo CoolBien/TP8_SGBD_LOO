@@ -7,6 +7,8 @@ import java.util.function.Consumer;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import bdd.data.Utilisateur;
+
 public class Controller implements IControllerListener {
 
 	////////////////////////////////// SINGLETON
@@ -79,4 +81,8 @@ public class Controller implements IControllerListener {
 
 	////////////////////////////////// CONTROLLER
 
+	public void addUtilisateur(final Utilisateur utilisateur) {
+		session.save(utilisateur);
+		dispatchEvent(c -> c.addUtilsiateur(utilisateur));
+	}
 }
