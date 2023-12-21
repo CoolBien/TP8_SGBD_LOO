@@ -2,9 +2,9 @@ package bdd.view;
 
 import org.eclipse.swt.widgets.Composite;
 
-public class Inscription {
+public class InscriptionView {
 
-	public Inscription(final Composite composite) {
+	public InscriptionView(final Composite composite) {
 		// TODO Auto-generated constructor stub
 	}
 

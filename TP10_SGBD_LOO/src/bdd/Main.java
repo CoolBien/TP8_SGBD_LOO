@@ -14,7 +14,7 @@ import org.hibernate.SessionFactory;
 import bdd.controller.Controller;
 import bdd.util.HibernateUtil;
 import bdd.view.ConnexionView;
-import bdd.view.Inscription;
+import bdd.view.InscriptionView;
 
 public class Main {
 
@@ -35,7 +35,7 @@ public class Main {
 			composite.setLayout(new GridLayout(2, false));
 
 			new ConnexionView(composite);
-			new Inscription(composite);
+			new InscriptionView(composite);
 
 			shell.addShellListener(ShellListener.shellClosedAdapter(s -> Controller.getInstance().endSession()));
 			shell.setText("Medecin ++");
