@@ -4,6 +4,7 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.ShellListener;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.TabFolder;
@@ -12,6 +13,8 @@ import org.hibernate.SessionFactory;
 
 import bdd.controller.Controller;
 import bdd.util.HibernateUtil;
+import bdd.view.ConnexionView;
+import bdd.view.Inscription;
 
 public class Main {
 
@@ -27,10 +30,12 @@ public class Main {
 			final Shell shell = new Shell(display);
 			shell.setLayout(new GridLayout(1, false));
 
-			final TabFolder tabFolder = new TabFolder(shell, SWT.TOP);
-			tabFolder.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
+			final Composite composite = new Composite(shell, SWT.NONE);
+			composite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
+			composite.setLayout(new GridLayout(2, false));
 
-//			new EtudiantView(tabFolder);
+			new ConnexionView(composite);
+			new Inscription(composite);
 
 			shell.addShellListener(ShellListener.shellClosedAdapter(s -> Controller.getInstance().endSession()));
 			shell.setText("Medecin ++");
