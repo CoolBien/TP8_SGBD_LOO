@@ -24,6 +24,8 @@ public class Utilisateur {
 	@Column(name = "ssn")
 	private int snn;
 
+	public Utilisateur() {}
+
 	public Utilisateur(final String name, final String firstName, final int snn) {
 		this.name = name;
 		this.firstName = firstName;
