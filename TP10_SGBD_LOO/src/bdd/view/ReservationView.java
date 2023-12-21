@@ -32,7 +32,7 @@ public class ReservationView {
 		combo.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
 		for (final TypeAnalyse type: Controller.getInstance().getTypeAnalyses()) {
 			combo.add(type.toString());
-			combo.setData(type.toString(), type);
+			combo.setData(""+type.getId(), type);
 		}
 	}
 }

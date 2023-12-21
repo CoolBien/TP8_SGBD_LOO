@@ -82,4 +82,8 @@ public class TypeAnalyse {
 		this.prix = prix;
 	}
 
+	@Override
+	public String toString() {
+		return prix + " €, hemogramme: " + hemogramme + ", groupeSanguin: " + groupeSanguin + ", vitesseSedimentation: " + vitesseSedimentation;
+	}
 }
