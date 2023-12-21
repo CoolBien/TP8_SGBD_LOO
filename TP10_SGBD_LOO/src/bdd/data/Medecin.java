@@ -1,9 +1,13 @@
 package bdd.data;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -26,6 +30,9 @@ public class Medecin {
 
 	@Column(name = "salaire")
 	private float salaire;
+
+	@ManyToMany
+	private final List<TypeAnalyse> autorisations = new ArrayList<>();
 
 	public Medecin(final String name, final String firstName, final int snn, final float salaire) {
 		this.name = name;
@@ -102,5 +109,12 @@ public class Medecin {
 	 */
 	public void setSalaire(final float salaire) {
 		this.salaire = salaire;
+	}
+
+	/**
+	 * @return the autorisations
+	 */
+	public List<TypeAnalyse> getAutorisations() {
+		return autorisations;
 	}
 }
