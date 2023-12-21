@@ -10,6 +10,8 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
+import bdd.util.SWTUTils;
+
 public class ConnexionView {
 
 	public ConnexionView(final Composite composite) {
@@ -31,7 +33,23 @@ public class ConnexionView {
 		buttonvaliderlabel.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-
+				try {
+					int numconnexion = Integer.parseInt(entrernumlabel.getText());
+				} catch (final NumberFormatException exc) {
+					SWTUTils.showError(buttonvaliderlabel.getShell(), "Pas un nombre",
+							"Veuillez mettre un nombre valide pour le Numéro de Sécurité Sociale.");
+					System.err.println("pas un nombre");
+					return;
+				}
+				try {
+					//A faire après
+				} catch (final NumberFormatException exc) {
+					SWTUTils.showError(buttonvaliderlabel.getShell(), "Inexistant",
+							"L'utilisateur n'existe pas.");
+					System.err.println("pas de numéro correspondant");
+					return;
+				}
+				
 			}
 		});
 
