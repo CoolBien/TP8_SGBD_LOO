@@ -55,6 +55,12 @@ public class InscriptionView {
 					final int ssn = Integer.parseInt(numeroText.getText());
 
 					Controller.getInstance().addUtilisateur(new Utilisateur(name, firstName, ssn));
+
+					final Composite parent = composite.getParent();
+					composite.dispose();
+					new UtilisateurView(parent);
+					parent.getShell().layout(true, true);
+
 				} catch (final Exception exc) {
 					exc.printStackTrace();
 					SWTUTils.showError(Display.getCurrent().getActiveShell(), exc);
