@@ -6,6 +6,7 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
 import bdd.data.Medecin;
+import bdd.data.Utilisateur;
 
 public class HibernateUtil {
 	private static final SessionFactory sessionFactory;
@@ -13,6 +14,7 @@ public class HibernateUtil {
 		try {
 			final Configuration conf = new Configuration().configure();
 			conf.addAnnotatedClass(Medecin.class);
+			conf.addAnnotatedClass(Utilisateur.class);
 			conf.configure();
 			final ServiceRegistry sr = new StandardServiceRegistryBuilder().applySettings(conf.getProperties()).build();
 			sessionFactory = conf.buildSessionFactory(sr);
