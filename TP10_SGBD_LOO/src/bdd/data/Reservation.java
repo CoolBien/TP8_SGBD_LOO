@@ -27,7 +27,7 @@ public class Reservation {
 	@Column(name = "priceToPay")
 	private float priceToPay;
 
-	@Column(name = "priceToPay")
+	@Column(name = "pricePayed")
 	private float pricePayed;
 
 	@ManyToOne
