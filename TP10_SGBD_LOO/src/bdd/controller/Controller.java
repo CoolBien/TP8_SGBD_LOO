@@ -7,6 +7,7 @@ import java.util.function.Consumer;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import bdd.data.TypeAnalyse;
 import bdd.data.Utilisateur;
 
 public class Controller implements IControllerListener {
@@ -84,5 +85,12 @@ public class Controller implements IControllerListener {
 	public void addUtilisateur(final Utilisateur utilisateur) {
 		session.save(utilisateur);
 		dispatchEvent(c -> c.addUtilsiateur(utilisateur));
+	}
+
+	/**
+	 * @return la liste des {@link Enseignement enseignements}.
+	 */
+	public List<TypeAnalyse> getTypeAnalyses() {
+		return session.createQuery("FROM TypeAnalyse", TypeAnalyse.class).list();
 	}
 }
