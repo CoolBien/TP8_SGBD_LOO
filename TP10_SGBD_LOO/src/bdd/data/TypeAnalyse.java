@@ -96,6 +96,6 @@ public class TypeAnalyse {
 
 	@Override
 	public String toString() {
-		return prix + " €, hemogramme: " + hemogramme + ", groupeSanguin: " + groupeSanguin + ", vitesseSedimentation: " + vitesseSedimentation + ", duree:" + duree;
+		return prix + " €, hemogramme: " + hemogramme + ", groupeSanguin: " + groupeSanguin + ", vitesseSedimentation: " + vitesseSedimentation + ", duree: " + duree;
 	}
 }
