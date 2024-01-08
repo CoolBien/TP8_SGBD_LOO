@@ -1,7 +1,6 @@
 package bdd.view;
 
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.layout.BorderData;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
@@ -12,14 +11,17 @@ import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
 
 import bdd.controller.Controller;
+import bdd.controller.IControllerListener;
 import bdd.data.Reservation;
 import bdd.data.Utilisateur;
 
-public class PayerView {
+public class PayerView implements IControllerListener {
 
-	private Table tableReservation;
+	private final Table tableReservation;
 
-	public PayerView(final TabFolder tabFolder, Utilisateur user) {
+	public PayerView(final TabFolder tabFolder, final Utilisateur user) {
+		Controller.getInstance().addListener(this);
+
 		final TabItem tabItem = new TabItem(tabFolder, SWT.NONE);
 		tabItem.setText("Payer");
 		final Composite composite = new Composite(tabFolder, SWT.NONE);
@@ -33,12 +35,12 @@ public class PayerView {
 		tableReservation.setLinesVisible(true);
 		tableReservation.setHeaderVisible(true);
 		new TableColumn(tableReservation, SWT.LEAD).setText("Id");
-		new TableColumn(tableReservation, SWT.LEAD).setText("User");
-		new TableColumn(tableReservation, SWT.LEAD).setText("Medecin");
-		new TableColumn(tableReservation, SWT.LEAD).setText("Start Date");
-		new TableColumn(tableReservation, SWT.LEAD).setText("End Date");
-		new TableColumn(tableReservation, SWT.LEAD).setText("Price Payed");
-		new TableColumn(tableReservation, SWT.LEAD).setText("Price To Pay");
+		new TableColumn(tableReservation, SWT.LEAD).setText("Utilsiateurs");
+		new TableColumn(tableReservation, SWT.LEAD).setText("Médecin");
+		new TableColumn(tableReservation, SWT.LEAD).setText("Date de début");
+		new TableColumn(tableReservation, SWT.LEAD).setText("Date de fin");
+		new TableColumn(tableReservation, SWT.LEAD).setText("Prix payé");
+		new TableColumn(tableReservation, SWT.LEAD).setText("Prix à payer");
 
 		for (final Reservation e : Controller.getInstance().getReservations(user)) {
 			addReservation(e);
@@ -49,6 +51,7 @@ public class PayerView {
 		}
 	}
 
+	@Override
 	public void addReservation(final Reservation reservation) {
 		final TableItem tableItem = new TableItem(tableReservation, SWT.NONE);
 		tableItem.setText(0, "" + reservation.getId());
@@ -58,6 +61,6 @@ public class PayerView {
 		tableItem.setText(4, "" + reservation.getEndDate());
 		tableItem.setText(5, "" + reservation.getPricePayed());
 		tableItem.setText(6, "" + reservation.getPriceToPay());
-		
+
 	}
 }
