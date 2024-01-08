@@ -14,7 +14,7 @@ public class UtilisateurView {
 		final TabFolder tabFolder = new TabFolder(composite, SWT.TOP);
 		tabFolder.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 
-		new ReservationView(tabFolder);
+		new ReservationView(tabFolder, user);
 		new PayerView(tabFolder);
 	}
 }
