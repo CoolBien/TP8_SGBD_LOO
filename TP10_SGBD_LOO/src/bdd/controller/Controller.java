@@ -118,14 +118,16 @@ public class Controller implements IControllerListener {
 	}
 
 	/**
-	 * @return la liste des {@link Reservation reservations}.
+	 * @return la liste des {@link Reservation réservations}.
 	 */
 	public List<Reservation> getAllReservations(){
 		return session.createQuery("FROM Reservation", Reservation.class).list();
 	}
 
 	/**
-	 * @return la liste des {@link Reservation reservations}.
+	 * Renvoie liste des {@link Reservation réservations} d'un {@link Utilisateur} particulier.
+	 * @param user : l'utilisateur auquel il faut récupérer les réservations.
+	 * @return la liste des {@link Reservation réservations} de cet utilisateur.
 	 */
 	public List<Reservation> getReservations(final Utilisateur user){
 		return getAllReservations().stream().filter(r -> r.getUser().equals(user)).toList();
