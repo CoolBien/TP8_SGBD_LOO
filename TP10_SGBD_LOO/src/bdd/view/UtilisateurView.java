@@ -15,6 +15,6 @@ public class UtilisateurView {
 		tabFolder.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 
 		new ReservationView(tabFolder);
-		new PayerView(tabFolder);
+		new PayerView(tabFolder, user);
 	}
 }
