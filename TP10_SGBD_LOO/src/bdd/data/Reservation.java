@@ -39,6 +39,8 @@ public class Reservation {
 	@ManyToOne
 	private Utilisateur user;
 
+	public Reservation() {}
+
 	public Reservation(final LocalDateTime startDate, final LocalDateTime endDate, final float priceToPay, final float pricePayed, final Medecin medecin, final TypeAnalyse typeAnalyse, final Utilisateur user) {
 		this.startDate = startDate;
 		this.endDate = endDate;

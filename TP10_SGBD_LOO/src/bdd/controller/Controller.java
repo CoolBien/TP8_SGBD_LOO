@@ -71,6 +71,8 @@ public class Controller implements IControllerListener {
 
 	private Session session;
 	private Transaction transaction;
+	private TypeAnalyse selectedTypeAnalyse;
+	private Medecin selectedMedecin;
 
 	public void setSession(final Session session) {
 		this.session = session;
@@ -148,5 +150,25 @@ public class Controller implements IControllerListener {
 	 */
 	public List<Medecin> getMedecinForAnalyse(final TypeAnalyse typeAnalyse) {
 		return getAllMedecins().stream().filter(m -> m.getAutorisations().contains(typeAnalyse)).toList();
+	}
+
+	@Override
+	public void selectTypeAnalyse(final TypeAnalyse selectedTypeAnalyse) {
+		this.selectedTypeAnalyse = selectedTypeAnalyse;
+		dispatchEvent(c -> c.selectTypeAnalyse(selectedTypeAnalyse));
+	}
+
+	public TypeAnalyse getSelectedTypeAnalyse() {
+		return selectedTypeAnalyse;
+	}
+
+	@Override
+	public void selectMedecin(final Medecin selectedMedecin) {
+		this.selectedMedecin = selectedMedecin;
+		dispatchEvent(c -> c.selectMedecin(selectedMedecin));
+	}
+
+	public Medecin getSelectedMedecin() {
+		return selectedMedecin;
 	}
 }

@@ -1,5 +1,6 @@
 package bdd.view;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.eclipse.swt.SWT;
@@ -14,15 +15,18 @@ import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.TabItem;
 
 import bdd.controller.Controller;
+import bdd.controller.IControllerListener;
 import bdd.data.Medecin;
+import bdd.data.Reservation;
 import bdd.data.TypeAnalyse;
 import bdd.data.Utilisateur;
 
-public class ReservationView {
+public class ReservationView implements IControllerListener {
 
 	private final Combo comboMedecin;
 
 	public ReservationView(final TabFolder tabFolder, final Utilisateur user) {
+		Controller.getInstance().addListener(this);
 
 		final TabItem tabItem = new TabItem(tabFolder, SWT.NONE);
 		tabItem.setText("Réserver");
@@ -46,7 +50,7 @@ public class ReservationView {
 		}
 		comboTypeAnalyse.addSelectionListener(SelectionListener.widgetSelectedAdapter(e -> {
 			final TypeAnalyse type = (TypeAnalyse) comboTypeAnalyse.getData("" + comboTypeAnalyse.getSelectionIndex());
-			selectTypeAnalyse(type);
+			Controller.getInstance().selectTypeAnalyse(type);
 		}));
 
 		final Label labelMedecin = new Label(composite, SWT.NONE);
@@ -55,7 +59,10 @@ public class ReservationView {
 
 		comboMedecin = new Combo(composite, SWT.DROP_DOWN | SWT.READ_ONLY);
 		comboMedecin.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
-
+		comboMedecin.addSelectionListener(SelectionListener.widgetSelectedAdapter(e -> {
+			final Medecin medecin = (Medecin) comboMedecin.getData("" + comboMedecin.getSelectionIndex());
+			Controller.getInstance().selectMedecin(medecin);
+		}));
 
 
 		// À laisser tout en bas en dernier :
@@ -63,12 +70,15 @@ public class ReservationView {
 		reservationButton.setLayoutData(new GridData(SWT.BEGINNING, SWT.CENTER, false, false));
 		reservationButton.setText("Réserver");
 		reservationButton.addSelectionListener(SelectionListener.widgetSelectedAdapter(e -> {
-			//
-//			Controller.getInstance().addReservation(new Reservation(startDate, endDate, priceToPay, 0, null, null, user));
+			final Controller controller = Controller.getInstance();
+			final TypeAnalyse typeAnalyse = controller.getSelectedTypeAnalyse();
+			controller.addReservation(new Reservation(
+					LocalDateTime.now(), LocalDateTime.now().plusHours(1), typeAnalyse.getPrix(), 0, controller.getSelectedMedecin(), typeAnalyse, user));
 		}));
 
 	}
 
+	@Override
 	public void selectTypeAnalyse(final TypeAnalyse analyse) {
 		comboMedecin.removeAll();
 		final List<Medecin> medecinForAnalyse = Controller.getInstance().getMedecinForAnalyse(analyse);

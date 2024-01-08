@@ -34,7 +34,7 @@ public class PayerView implements IControllerListener {
 		tabItem.setControl(composite);
 
 		tableReservation = new Table(composite, SWT.SINGLE | SWT.FULL_SELECTION | SWT.BORDER);
-		tableReservation.setLayoutData(new GridData());
+		tableReservation.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 		tableReservation.setLinesVisible(true);
 		tableReservation.setHeaderVisible(true);
 		new TableColumn(tableReservation, SWT.LEAD).setText("Id");
@@ -52,17 +52,17 @@ public class PayerView implements IControllerListener {
 		for (int i = 0; i < tableReservation.getColumnCount(); i++) {
 			tableReservation.getColumn(i).pack();
 		}
-		
-		Button buttonPay = new Button(composite, SWT.PUSH);
+
+		final Button buttonPay = new Button(composite, SWT.PUSH);
 		buttonPay.setLayoutData(new GridData(SWT.BEGINNING, SWT.CENTER, false, false));
 		buttonPay.setText("Payer");
 		buttonPay.addSelectionListener(new SelectionAdapter() {
 			@Override
-			public void widgetSelected(SelectionEvent e) {
-				
+			public void widgetSelected(final SelectionEvent e) {
+
 			}
 		});
-		
+
 	}
 
 	@Override
