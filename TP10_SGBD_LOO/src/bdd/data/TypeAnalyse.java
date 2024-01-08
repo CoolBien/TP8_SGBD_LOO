@@ -26,8 +26,8 @@ public class TypeAnalyse {
 
 	@Column(name = "prix")
 	private float prix;
-	
-	@Column(name = "durée")
+
+	@Column(name = "duree")
 	private int duree;
 
 	public TypeAnalyse() {}
@@ -90,10 +90,10 @@ public class TypeAnalyse {
 		return duree;
 	}
 
-	public void setDuree(int duree) {
+	public void setDuree(final int duree) {
 		this.duree = duree;
 	}
-	
+
 	@Override
 	public String toString() {
 		return prix + " €, hemogramme: " + hemogramme + ", groupeSanguin: " + groupeSanguin + ", vitesseSedimentation: " + vitesseSedimentation + "duree:" + duree;
