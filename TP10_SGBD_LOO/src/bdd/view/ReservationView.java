@@ -56,6 +56,8 @@ public class ReservationView {
 		comboMedecin = new Combo(composite, SWT.DROP_DOWN | SWT.READ_ONLY);
 		comboMedecin.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
 
+
+
 		// À laisser tout en bas en dernier :
 		final Button reservationButton = new Button(composite, SWT.PUSH);
 		reservationButton.setLayoutData(new GridData(SWT.BEGINNING, SWT.CENTER, false, false));
@@ -69,9 +71,11 @@ public class ReservationView {
 
 	public void selectTypeAnalyse(final TypeAnalyse analyse) {
 		comboMedecin.removeAll();
-		for (final Medecin medecin: Controller.getInstance().getMedecinForAnalyse(analyse)) {
+		final List<Medecin> medecinForAnalyse = Controller.getInstance().getMedecinForAnalyse(analyse);
+		for (int i = 0; i < medecinForAnalyse.size(); i++) {
+			final Medecin medecin = medecinForAnalyse.get(i);
 			comboMedecin.add(medecin.getFirstName()+" "+medecin.getName().toUpperCase());
-			comboMedecin.setData(""+medecin.getId(), medecin);
+			comboMedecin.setData(""+i, medecin);
 		}
 	}
 }
