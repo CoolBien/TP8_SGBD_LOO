@@ -26,14 +26,18 @@ public class TypeAnalyse {
 
 	@Column(name = "prix")
 	private float prix;
+	
+	@Column(name = "durée")
+	private int duree;
 
 	public TypeAnalyse() {}
 
-	public TypeAnalyse(final String hemogramme, final String groupeSanguin, final float vitesseSedimentation, final float prix) {
+	public TypeAnalyse(final String hemogramme, final String groupeSanguin, final float vitesseSedimentation, final float prix, final int duree) {
 		this.hemogramme = hemogramme;
 		this.groupeSanguin = groupeSanguin;
 		this.vitesseSedimentation = vitesseSedimentation;
 		this.prix = prix;
+		this.duree = duree;
 	}
 
 	public int getId() {
@@ -82,8 +86,16 @@ public class TypeAnalyse {
 		this.prix = prix;
 	}
 
+	public int getDuree() {
+		return duree;
+	}
+
+	public void setDuree(int duree) {
+		this.duree = duree;
+	}
+	
 	@Override
 	public String toString() {
-		return prix + " €, hemogramme: " + hemogramme + ", groupeSanguin: " + groupeSanguin + ", vitesseSedimentation: " + vitesseSedimentation;
+		return prix + " €, hemogramme: " + hemogramme + ", groupeSanguin: " + groupeSanguin + ", vitesseSedimentation: " + vitesseSedimentation + "duree:" + duree;
 	}
 }
