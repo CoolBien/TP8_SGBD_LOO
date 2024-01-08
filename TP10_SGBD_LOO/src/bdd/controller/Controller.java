@@ -97,6 +97,7 @@ public class Controller implements IControllerListener {
 		return null;
 	}
 
+	@Override
 	public void addReservation(final Reservation reservation) {
 		session.save(reservation);
 		dispatchEvent(c -> c.addReservation(reservation));
@@ -114,5 +115,19 @@ public class Controller implements IControllerListener {
 	 */
 	public List<TypeAnalyse> getTypeAnalyses() {
 		return session.createQuery("FROM TypeAnalyse", TypeAnalyse.class).list();
+	}
+
+	/**
+	 * @return la liste des {@link Reservation reservations}.
+	 */
+	public List<Reservation> getAllReservations(){
+		return session.createQuery("FROM Reservation", Reservation.class).list();
+	}
+
+	/**
+	 * @return la liste des {@link Reservation reservations}.
+	 */
+	public List<Reservation> getReservations(final Utilisateur user){
+		return getAllReservations().stream().filter(r -> r.getUser().equals(user)).toList();
 	}
 }
