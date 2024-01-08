@@ -34,6 +34,8 @@ public class Medecin {
 	@ManyToMany
 	private final List<TypeAnalyse> autorisations = new ArrayList<>();
 
+	public Medecin() {}
+
 	public Medecin(final String name, final String firstName, final int snn, final float salaire) {
 		this.name = name;
 		this.firstName = firstName;

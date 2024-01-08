@@ -7,6 +7,7 @@ import java.util.function.Consumer;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import bdd.data.Medecin;
 import bdd.data.Reservation;
 import bdd.data.TypeAnalyse;
 import bdd.data.Utilisateur;
@@ -89,7 +90,7 @@ public class Controller implements IControllerListener {
 	}
 
 	public Utilisateur getUtilisateurWithSSN(final int ssn) {
-		for (final Utilisateur u: getUtilisateurs()) {
+		for (final Utilisateur u: getAllUtilisateurs()) {
 			if (u.getSnn() == ssn) {
 				return u;
 			}
@@ -106,21 +107,21 @@ public class Controller implements IControllerListener {
 	/**
 	 * @return la liste des {@link Utilisateur utilisateurs}.
 	 */
-	public List<Utilisateur> getUtilisateurs() {
+	public List<Utilisateur> getAllUtilisateurs() {
 		return session.createQuery("FROM Utilisateur", Utilisateur.class).list();
 	}
 
 	/**
 	 * @return la liste des {@link Enseignement enseignements}.
 	 */
-	public List<TypeAnalyse> getTypeAnalyses() {
+	public List<TypeAnalyse> getAllTypeAnalyses() {
 		return session.createQuery("FROM TypeAnalyse", TypeAnalyse.class).list();
 	}
 
 	/**
 	 * @return la liste des {@link Reservation réservations}.
 	 */
-	public List<Reservation> getAllReservations(){
+	public List<Reservation> getAllReservations() {
 		return session.createQuery("FROM Reservation", Reservation.class).list();
 	}
 
@@ -129,7 +130,23 @@ public class Controller implements IControllerListener {
 	 * @param user : l'utilisateur auquel il faut récupérer les réservations.
 	 * @return la liste des {@link Reservation réservations} de cet utilisateur.
 	 */
-	public List<Reservation> getReservations(final Utilisateur user){
+	public List<Reservation> getReservations(final Utilisateur user) {
 		return getAllReservations().stream().filter(r -> r.getUser().equals(user)).toList();
+	}
+
+	/**
+	 * @return la liste des {@link Medecin médecins}.
+	 */
+	public List<Medecin> getAllMedecins() {
+		return session.createQuery("FROM Medecin", Medecin.class).list();
+	}
+
+	/**
+	 * Renvoie la liste des {@link Medecin médecins} compétents pour un type d'analyse.
+	 * @param typeAnalyse : le {@link TypeAnalyse type d'analyse} dont on veut les médecins compétents.
+	 * @return la liste des {@link Medecin médecins} compétents pour ce type d'analyse.
+	 */
+	public List<Medecin> getMedecinForAnalyse(final TypeAnalyse typeAnalyse) {
+		return getAllMedecins().stream().filter(m -> m.getAutorisations().contains(typeAnalyse)).toList();
 	}
 }
