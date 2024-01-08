@@ -1,8 +1,11 @@
 package bdd.view;
 
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.TabItem;
@@ -26,7 +29,7 @@ public class PayerView implements IControllerListener {
 		tabItem.setText("Payer");
 		final Composite composite = new Composite(tabFolder, SWT.NONE);
 		composite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
-		composite.setLayout(new GridLayout(1, false));
+		composite.setLayout(new GridLayout(2, false));
 
 		tabItem.setControl(composite);
 
@@ -49,6 +52,17 @@ public class PayerView implements IControllerListener {
 		for (int i = 0; i < tableReservation.getColumnCount(); i++) {
 			tableReservation.getColumn(i).pack();
 		}
+		
+		Button buttonPay = new Button(composite, SWT.PUSH);
+		buttonPay.setLayoutData(new GridData(SWT.BEGINNING, SWT.CENTER, false, false));
+		buttonPay.setText("Payer");
+		buttonPay.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				
+			}
+		});
+		
 	}
 
 	@Override
@@ -61,6 +75,5 @@ public class PayerView implements IControllerListener {
 		tableItem.setText(4, "" + reservation.getEndDate());
 		tableItem.setText(5, "" + reservation.getPricePayed());
 		tableItem.setText(6, "" + reservation.getPriceToPay());
-
 	}
 }
