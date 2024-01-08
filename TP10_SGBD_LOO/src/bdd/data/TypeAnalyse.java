@@ -72,6 +72,15 @@ public class TypeAnalyse {
 		this.vitesseSedimentation = vitesseSedimentation;
 	}
 
+	public int getDuree() {
+		return duree;
+	}
+
+	public void setDuree(int duree) {
+		this.duree = duree;
+	}
+	
+	
 	/**
 	 * @return the prix
 	 */
@@ -86,14 +95,6 @@ public class TypeAnalyse {
 		this.prix = prix;
 	}
 
-	public int getDuree() {
-		return duree;
-	}
-
-	public void setDuree(int duree) {
-		this.duree = duree;
-	}
-	
 	@Override
 	public String toString() {
 		return prix + " €, hemogramme: " + hemogramme + ", groupeSanguin: " + groupeSanguin + ", vitesseSedimentation: " + vitesseSedimentation + "duree:" + duree;
